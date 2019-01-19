@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "c-question":"/compoments/question/question"
+  }
+}

@@ -1,0 +1,70 @@
+<!-- 引入.wxs文件 src为相对路径，module指定当前模块的名称 -->
+<wxs module="f" src="./common.wxs"></wxs>
+
+<scroll-view>
+<view class="header">
+  <block wx:if="{{typ=='single'}}">
+  <text class="category">选择</text>
+  </block>
+    <block wx:if="{{typ=='mutiple'}}">
+  <text class="category">多选</text>
+  </block>
+  <block wx:if="{{typ=='judge'}}">
+  <text class="category">判断</text>
+  </block>
+  <text class="question">{{data[2]}}</text>
+</view>
+<view class="main">
+<block  wx:for="{{data[1]}}" wx:for-index="idx" wx:for-item="answer">
+  <view data-idx="{{idx}}" class="option{{is_selected[idx]?' grayb':''}}" bindtap='tap_select'>
+
+    <rich-text nodes="<div class='circle white'>{{f.index_to_char(idx)}}</div>"></rich-text> 
+
+ 
+    <rich-text nodes="{{f.is_highlight(answer)}}" class="answer green2"></rich-text>
+
+
+   
+    
+  </view>
+</block>
+<!--
+    <view class="option" style="background-color:#d3d3d3;">
+    <text class="circle">B</text>
+    <text class="answer">{{b}}</text>
+  </view>
+  <view class="option" style="background-color:#d3d3d3;">
+    <text class="circle green">√</text>
+    <text class="answer">{{c}}</text>
+  </view>
+  <view class="option">
+    <text class="circle white">D</text>
+    <text class="answer">{{d}}</text>
+  </view>
+  <block wx:if="{{e.length>0}}">
+    <view class="option">
+    <text class="circle orange">×</text>
+    <text class="answer">{{e}}</text>
+  </view>
+  </block>
+  -->
+  <block wx:if="{{typ=='mutiple'}}">
+  <view class="confirm" bindtap='tap_confirm'>
+  <view class="btn{{(selected_cnt > 1) ?' green':' grayc'}}">确定</view>
+  </view>
+  </block>
+</view>
+<view class="br"></view>
+
+<view class="memory_header">
+<view class="memory_icon"></view>
+<view class="memory_title">记忆技巧</view>
+</view> 
+<view class="line"></view>
+
+<view class="memory_content">
+<image src="/images/vip.png" mode="widthFix"></image>
+</view>
+<view class="br"></view>
+
+</scroll-view>
