@@ -1,6 +1,6 @@
 <!-- 引入.wxs文件 src为相对路径，module指定当前模块的名称 -->
 <wxs module="f" src="./common.wxs"></wxs>
-
+{{a}}
 <scroll-view>
 <view class="header">
   <block wx:if="{{typ=='single'}}">
@@ -18,10 +18,10 @@
 <block  wx:for="{{data[1]}}" wx:for-index="idx" wx:for-item="answer">
   <view data-idx="{{idx}}" class="option{{is_selected[idx]?' grayb':''}}" bindtap='tap_select'>
 
-    <rich-text nodes="<div class='circle white'>{{f.index_to_char(idx)}}</div>"></rich-text> 
+    <rich-text nodes="<div class='circle white'>{{answer[2]}}</div>"></rich-text> 
 
  
-    <rich-text nodes="{{f.is_highlight(answer)}}" class="answer green2"></rich-text>
+    <rich-text nodes="{{answer[0]}}" class="answer green2"></rich-text>
 
 
    
