@@ -1,56 +1,37 @@
 <!-- 引入.wxs文件 src为相对路径，module指定当前模块的名称 -->
 <wxs module="f" src="./common.wxs"></wxs>
-{{a}}
+
 <scroll-view>
 <view class="header">
-  <block wx:if="{{typ=='single'}}">
+  <block wx:if="{{data[4]=='S'}}">
   <text class="category">选择</text>
   </block>
-    <block wx:if="{{typ=='mutiple'}}">
+    <block wx:if="{{data[4]=='M'}}">
   <text class="category">多选</text>
   </block>
-  <block wx:if="{{typ=='judge'}}">
+  <block wx:if="{{data[4]=='J'}}">
   <text class="category">判断</text>
   </block>
   <text class="question">{{data[2]}}</text>
 </view>
 <view class="main">
 <block  wx:for="{{data[1]}}" wx:for-index="idx" wx:for-item="answer">
-  <view data-idx="{{idx}}" class="option{{is_selected[idx]?' grayb':''}}" bindtap='tap_select'>
+  <view data-idx="{{idx}}" class="option{{answer[5]}}" bindtap='tap_select'>
 
-    <rich-text nodes="<div class='circle white'>{{answer[2]}}</div>"></rich-text> 
+    <rich-text nodes="<div class='circle {{answer[4]}}'>{{answer[2]}}</div>"></rich-text> 
 
  
-    <rich-text nodes="{{answer[0]}}" class="answer green2"></rich-text>
+    <rich-text nodes="{{answer[0]}}" class="answer{{answer[3]}}"></rich-text>
 
 
    
     
   </view>
 </block>
-<!--
-    <view class="option" style="background-color:#d3d3d3;">
-    <text class="circle">B</text>
-    <text class="answer">{{b}}</text>
-  </view>
-  <view class="option" style="background-color:#d3d3d3;">
-    <text class="circle green">√</text>
-    <text class="answer">{{c}}</text>
-  </view>
-  <view class="option">
-    <text class="circle white">D</text>
-    <text class="answer">{{d}}</text>
-  </view>
-  <block wx:if="{{e.length>0}}">
-    <view class="option">
-    <text class="circle orange">×</text>
-    <text class="answer">{{e}}</text>
-  </view>
-  </block>
-  -->
-  <block wx:if="{{typ=='mutiple'}}">
+
+  <block wx:if="{{(data[4]=='M') && (data[8] == 'practice' || data[8])}}">
   <view class="confirm" bindtap='tap_confirm'>
-  <view class="btn{{(selected_cnt > 1) ?' green':' grayc'}}">确定</view>
+  <view class="btn{{data[7]}}">确定</view>
   </view>
   </block>
 </view>
@@ -63,7 +44,12 @@
 <view class="line"></view>
 
 <view class="memory_content">
+ <block wx:if="{{is_vip==false}}">
 <image src="/images/vip.png" mode="widthFix"></image>
+</block>
+<block wx:else>
+{{data[6]}}
+</block>
 </view>
 <view class="br"></view>
 

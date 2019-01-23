@@ -2,23 +2,22 @@ var _ = require('../../utils/underscore.js');
 var db = require("../../utils/data.js");
 var utils = require("../../utils/util.js")
 var core = require("../../utils/core.js")
+var store = require("../../utils/store.js")
 
 var r;
 var id = 2;
-var is_selected = [false, false, false, false, false];
-//var answers = [];
-
-
 // compoments/question/question.js
 Component({
   /**
    * 组件的属性列表
    */
   properties: {
+    is_show_answer:{type:Boolean,value:false},
+    is_vip:{type:Boolean,value:true},
     mode:{type:String,value:"practice"},//practice,exam,memory_normal,memory_vip
-    typ:{type:String,value:"mutiple"},
+     /*typ:{type:String,value:"mutiple"},
     question:{type:String,value:'aaaaa'},
-    answers:{type:Array,value:["aaaa","bbb"]},
+    answers:{type:Array,value:["aaaa","bbb"]},*/
     idata: {
       type: Array, value: [
         9091,
@@ -29,8 +28,8 @@ Component({
           ["构建的具体指标", ""]
         ],
         "大学生品德评价指标体系一般包括（    ）。",
-        "ACD",
-        "mutiple",
+        "ABC",
+        "M",
         "大学心理学",
         "memory tips"
       ]}
@@ -45,33 +44,56 @@ Component({
   },
 
 ready:function(){
-  console.log("zzzzdd")
-  console.log(this.properties.typ.value)
-  console.log(this.properties.typ)
-  this.properties.typ="single"
-  console.log(this.properties.typ)
+
 var that = this
   this.data.a = 3
-//根据输入的外部数据转换为需要的格式
+  let selected_idx = store.get(this.properties.idata[0])
 
-  let r = this.transform(this.properties.idata, this.properties.mode);
-  console.log("r=>",r)
-  console.log("====")
-that.setData({data:r})
-that.setData({a:5})
-console.log(this.properties.idata);
-//that.setData({data:this.properties.idata});
+  let r = core.data_state_change(this.properties.idata, this.properties.mode, selected_idx,this.properties.is_show_answer)
+  console.log(r)
+  that.setData({data:r})
+
 },
 
   /**
    * 组件的方法列表
    */
   methods: {
+    tap_confirm:function(e){
+      var that = this;
+      let selected_idx = store.get(this.properties.idata[0])
+      let r = core.data_state_change(this.properties.idata, this.properties.mode, selected_idx, true)
+      that.setData({ data: r })  
+    },
     tap_select: function (e) {
-      console.log("ttt,", this.data);
-      if(this.data.mode == "normal")
+      if (this.properties.mode == "memory_normal" || this.properties.mode == "memory_vip")
       {
+        return
+      }
+      var that = this;
+      var idx = e.currentTarget.dataset.idx;
+      
+      if (this.properties.idata[4] == 'M')
+      {
+        store.set(this.properties.idata[0],idx)
+        let selected_idx = store.get(this.properties.idata[0])
+        let r = core.data_state_change(this.properties.idata, this.properties.mode, selected_idx,false)
+        console.log("==================")
+        console.log(r)
+        that.setData({ data: r })    
+        return 
+      }
 
+
+      if(this.data.mode == "practice" || this.data.mode == "exam")
+      {
+        console.log("ttt,", this.data);
+
+        var idx = e.currentTarget.dataset.idx;
+        let r = core.data_state_change(this.properties.idata, this.properties.mode, [idx])
+        console.log(r)
+        that.setData({ data: r })
+        console.log(idx)
       }
     },
     transform(data,mode) {

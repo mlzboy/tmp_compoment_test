@@ -1,3 +1,9 @@
+function deepCopy(obj) {
+  let _obj = JSON.stringify(obj),
+    objClone = JSON.parse(_obj);
+  return objClone
+} 
+
 /*
 invoke:highlight_answer(["abcdefgh","2,4;5,6"])
 output:["ab<span class='red'>cd</span>e<span class='red'>f<…", "2,4;5,6"]
@@ -105,16 +111,60 @@ function highlight_answers(answers) {
 ["abcdefgh","2,4;5,6","A","正文颜色","选项A颜色"]
 fulldata为初始完成一道题的数据，fulldata[1]中每一个answer只包含[question,"2,3;4,5"]两项
 当用记有点击等行为是，调用此函数，将返回值使用this.setData({})进行更新即可
+is_show_answer=true表示，展示标记错误的正确的回答结果
+is_show_answer=false表示，展示最开始的题目显示状态，及多选下，未提交，点击多次的选择状态
 */
-function data_state_change(fulldata, mode, selected_idxs) {
-  let answers = fulldata[1]
+
+function data_state_change(fulldata, mode, selected_idxs, is_show_answer = true) {
+  let _fulldata = deepCopy(fulldata)
+  let answers = _fulldata[1]
   answers = add_answers_char(answers)
-  let right_answers = fulldata[3]
+  let right_answers = _fulldata[3]
+  //判断多选的确定按钮为灰色还是绿色
+  if (selected_idxs.length > 1) {
+    _fulldata.push(" green")
+  }
+  else {
+    _fulldata.push(" grayc")
+  }
+  //用于显示确定按钮
+  if ((mode == "practice" || mode == "exam") && _fulldata[4] == 'M') {
+    _fulldata.push(true)
+  }
+  else {
+    _fulldata.push(false)
+  }
+
+  if (_fulldata[4] == 'M' && (is_show_answer == false) && (selected_idxs.length > 0)) {
+    for (let i = 0; i < answers.length; ++i) {
+      answers[i].push("")//正文颜色
+      if (selected_idxs.includes(i)) {
+        answers[i].push(" grayd")//选项A颜色
+        answers[i].push(" grayb")//整行背景色
+      }
+      else {
+        answers[i].push(" white")//选项A颜色
+        answers[i].push("")//整行背景色
+      }
+      console.log(answers[i])
+    }
+    return _fulldata
+  }
+
+
+  if (selected_idxs.length == 0 && is_show_answer == false) {
+    for (let i = 0; i < answers.length; ++i) {
+      answers[i].push("")//正文颜色
+      answers[i].push(" white")//选项A颜色
+      answers[i].push("")//整行背景色
+      console.log(answers[i])
+    }
+    _fulldata[1] = answers
+    return _fulldata
+  }
   if (mode == "practice")//立马出结果
   {
     for (let i = 0; i < answers.length; ++i) {
-
-
       if (right_answers.includes(answers[i][2])) {
         answers[i].push(" green2")//正文颜色 
         answers[i].push("green")//选项A颜色
@@ -123,19 +173,22 @@ function data_state_change(fulldata, mode, selected_idxs) {
         answers[i].push("")//正文颜色
         answers[i].push(" white")//选项A颜色
       }
+      answers[i].push("")//整行背景色
       console.log(answers[i])
     }
 
     for (let i of selected_idxs) {
       if (right_answers.includes(answers[i][2])) {
-        answers[i][2] = "right"
+        answers[i][2] = "√"
       }
       else {
-        answers[i][2] = "wrong"
+        answers[i][2] = "×"
         answers[i][3] = " orange2"//正文
         answers[i][4] = " orange"//选项A
       }
     }
+
+
     console.log(answers)
 
   }
@@ -150,6 +203,7 @@ function data_state_change(fulldata, mode, selected_idxs) {
         answers[i].push("")//正文颜色
         answers[i].push(" white")//选项A颜色
       }
+      answers[i].push("")//整行背景色
       console.log(answers[i])
     }
   }
@@ -163,25 +217,69 @@ function data_state_change(fulldata, mode, selected_idxs) {
         answers[i].push("")//正文颜色
         answers[i].push(" white")//选项A颜色
       }
+      answers[i].push("")//整行背景色
       console.log(answers[i])
     }
   }
   else if (mode == "memory_vip") {
-    answers = highlight_answers(answers)
-    for (let i = 0; i < answers.length; ++i) {
-      if (right_answers.includes(answers[i][2])) {
-        answers[i].push(" green2")//正文颜色 
-        answers[i].push("green")//选项A颜色
+    if (_fulldata[4] == "M") {
+      //如果答案有4项，正确有3项，则标红错误项，
+      //如果答案全部正确，则全部标绿
+      //如果有二个正确选项，则标记正确项
+      answers = highlight_answers(answers)
+      if (answers.length == right_answers.length) {
+        for (let i = 0; i < answers.length; ++i) {
+          answers[i].push("")//正文颜色 
+          answers[i].push("green")//选项A颜色       
+          answers[i].push("")//整行背景色
+        }
+      }
+      else if (answers.length == (right_answers.length + 1)) {
+        for (let i = 0; i < answers.length; ++i) {
+          if (!right_answers.includes(answers[i][2])) {
+            answers[i].push("")//正文颜色 
+            answers[i].push(" orange")//选项A颜色
+          }
+          else {
+            answers[i].push("")//正文颜色 
+            answers[i].push("green")//选项A颜色                        
+          }
+          answers[i].push("")//整行背景色
+        }
       }
       else {
-        answers[i].push("")//正文颜色
-        answers[i].push(" white")//选项A颜色
+        for (let i = 0; i < answers.length; ++i) {
+          if (right_answers.includes(answers[i][2])) {
+            answers[i].push("")//正文颜色 
+            answers[i].push("green")//选项A颜色
+          }
+          else {
+            answers[i].push("")//正文颜色
+            answers[i].push(" white")//选项A颜色
+          }
+          answers[i].push("")//整行背景色
+        }
       }
-      console.log(answers[i])
+
+
     }
+    else {
+      for (let i = 0; i < answers.length; ++i) {
+        if (right_answers.includes(answers[i][2])) {
+          answers[i].push(" green2")//正文颜色 
+          answers[i].push("green")//选项A颜色
+        }
+        else {
+          answers[i].push("")//正文颜色
+          answers[i].push(" white")//选项A颜色
+        }
+        answers[i].push("")//整行背景色
+      }
+    }
+
   }
 
-  fulldata[1] = answers
+  _fulldata[1] = answers
   console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
   for (let i = 0; i < answers.length; ++i) {
     console.log(answers[i])
@@ -189,9 +287,8 @@ function data_state_change(fulldata, mode, selected_idxs) {
   }
 
 
-  return fulldata
+  return _fulldata
 }
-
 
 module.exports = {
   highlight_answer: highlight_answer,
