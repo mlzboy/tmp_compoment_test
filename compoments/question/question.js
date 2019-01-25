@@ -14,7 +14,7 @@ Component({
   properties: {
     is_show_answer:{type:Boolean,value:false},
     is_vip:{type:Boolean,value:true},
-    mode:{type:String,value:"exam"},//practice,exam,exam_show,memory_normal,memory_vip
+    mode:{type:String,value:"practice"},//practice,exam,exam_show,memory_normal,memory_vip
      /*typ:{type:String,value:"mutiple"},
     question:{type:String,value:'aaaaa'},
     answers:{type:Array,value:["aaaa","bbb"]},*/
@@ -47,7 +47,7 @@ ready:function(){
 
   var that = this
   this.data.a = 3
-  if (this.properties.mode == "practiced")
+  if (this.properties.mode == "practice")
   {
     let selected_idx = store.get(this.properties.idata[0])
     let is_show_answer = this.properties.is_show_answer
