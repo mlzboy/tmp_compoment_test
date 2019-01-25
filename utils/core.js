@@ -186,6 +186,8 @@ function data_state_change(fulldata, mode, selected_idxs, is_show_answer = true)
         answers[i][3] = " orange2"//正文
         answers[i][4] = " orange"//选项A
       }
+      answers[i][5] = " grayb"
+
     }
 
 

@@ -14,7 +14,7 @@ Component({
   properties: {
     is_show_answer:{type:Boolean,value:false},
     is_vip:{type:Boolean,value:true},
-    mode:{type:String,value:"practice"},//practice,exam,memory_normal,memory_vip
+    mode:{type:String,value:"exam"},//practice,exam,exam_show,memory_normal,memory_vip
      /*typ:{type:String,value:"mutiple"},
     question:{type:String,value:'aaaaa'},
     answers:{type:Array,value:["aaaa","bbb"]},*/
@@ -22,13 +22,13 @@ Component({
       type: Array, value: [
         9091,
         [
-          ["构建意义；", "2,3"],
-          ["构建程序；", "1,2;3,4"],
-          ["构建原则；", ""],
-          ["构建的具体指标", ""]
+          ["aaaaaaaaa", "1,3;4,7"],
+          ["bbbbbbbbbb", "2,4;5,8"],
+          ["cccccccccc", ""],
+          ["ddddddddddd", ""],
         ],
         "大学生品德评价指标体系一般包括（    ）。",
-        "ABC",
+        "BC",
         "M",
         "大学心理学",
         "memory tips"
@@ -45,14 +45,32 @@ Component({
 
 ready:function(){
 
-var that = this
+  var that = this
   this.data.a = 3
-  let selected_idx = store.get(this.properties.idata[0])
+  if (this.properties.mode == "practiced")
+  {
+    let selected_idx = store.get(this.properties.idata[0])
+    let is_show_answer = this.properties.is_show_answer
+    let is_practiced = store.is_practiced(this.properties.idata[0])//practiced
+    if (is_practiced)
+    {
+      is_show_answer = true
+    }
+    let r = core.data_state_change(this.properties.idata, this.properties.mode, selected_idx,is_show_answer)
+    r.push(store.is_practiced(r[0]))//practiced
+    console.log(r)
+    that.setData({data:r})
+  }
+  else if (this.properties.mode == "exam")
+  {
+    let selected_idx = store.get(this.properties.idata[0])
+    let is_show_answer = this.properties.is_show_answer
 
-  let r = core.data_state_change(this.properties.idata, this.properties.mode, selected_idx,this.properties.is_show_answer)
-  console.log(r)
-  that.setData({data:r})
-
+    let r = core.data_state_change(this.properties.idata, this.properties.mode, selected_idx, is_show_answer)
+    r.push(store.is_practiced(r[0]))//practiced
+    console.log(r)
+    that.setData({ data: r })   
+  }
 },
 
   /**
@@ -63,10 +81,12 @@ var that = this
       var that = this;
       let selected_idx = store.get(this.properties.idata[0])
       let r = core.data_state_change(this.properties.idata, this.properties.mode, selected_idx, true)
+      store.add_practiced(r[0])
+      r.push(true)//practiced
       that.setData({ data: r })  
     },
     tap_select: function (e) {
-      if (this.properties.mode == "memory_normal" || this.properties.mode == "memory_vip")
+      if (this.properties.mode == "memory_normal" || this.properties.mode == "memory_vip" || store.is_practiced(this.properties.idata[0])==true)
       {
         return
       }
@@ -78,6 +98,7 @@ var that = this
         store.set(this.properties.idata[0],idx)
         let selected_idx = store.get(this.properties.idata[0])
         let r = core.data_state_change(this.properties.idata, this.properties.mode, selected_idx,false)
+        r.push(false)//practiced
         console.log("==================")
         console.log(r)
         that.setData({ data: r })    
@@ -88,9 +109,11 @@ var that = this
       if(this.data.mode == "practice" || this.data.mode == "exam")
       {
         console.log("ttt,", this.data);
-
         var idx = e.currentTarget.dataset.idx;
+        store.set(this.properties.idata[0], idx)
         let r = core.data_state_change(this.properties.idata, this.properties.mode, [idx])
+        store.add_practiced(r[0])
+        r.push(true)//practiced
         console.log(r)
         that.setData({ data: r })
         console.log(idx)

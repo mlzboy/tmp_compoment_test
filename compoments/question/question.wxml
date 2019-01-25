@@ -29,7 +29,7 @@
   </view>
 </block>
 
-  <block wx:if="{{(data[4]=='M') && (data[8] == 'practice' || data[8])}}">
+  <block wx:if="{{(data[4]=='M') && (data[8] == 'practice' || data[8]) && (data[9] == false)}}">
   <view class="confirm" bindtap='tap_confirm'>
   <view class="btn{{data[7]}}">确定</view>
   </view>

@@ -1,4 +1,31 @@
 //var dict={}
+function is_practiced(id)
+{
+  let list = []
+  if (_has_key("practiced")) {
+    list = _get("practiced")
+    let ret = list.indexOf(id)  
+    return (ret > -1) ? true : false
+  }
+  return false;
+}
+
+function add_practiced(id)
+{
+  let list = []
+  if (_has_key("practiced"))
+  {
+    list = _get("practiced")
+    let ret = list.indexOf(id)
+    if (ret > -1) {
+      return false
+    }
+  }
+  list.push(id)
+  _set("practiced",list)
+  return true
+}
+
 function set(id,idx)
 {
   var list = [];
@@ -50,7 +77,9 @@ function _has_key(key)
 
 module.exports = {
   set: set,
-  get: _get
+  get: _get,
+  is_practiced:is_practiced,
+  add_practiced:add_practiced
 }
 /*
 console.log(set(1,1))
@@ -58,3 +87,4 @@ console.log(set(1,2))
 
 console.log(set(1,1))
 */
+
