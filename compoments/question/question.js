@@ -14,7 +14,7 @@ Component({
   properties: {
     is_show_answer:{type:Boolean,value:false},
     is_vip:{type:Boolean,value:true},
-    mode:{type:String,value:"practice"},//practice,exam,exam_show,memory_normal,memory_vip
+    mode:{type:String,value:"exam"},//practice,exam,exam_show,memory_normal,memory_vip
      /*typ:{type:String,value:"mutiple"},
     question:{type:String,value:'aaaaa'},
     answers:{type:Array,value:["aaaa","bbb"]},*/
@@ -53,19 +53,22 @@ ready:function(){
   this.data.a = 3
   if (this.properties.mode == "practice")
   {
-    let selected_idx = store.get(this.properties.idata[0])
+    let selected_idx = store.sget(this.properties.mode, this.properties.idata[0])
     let is_show_answer = this.properties.is_show_answer
     let is_practiced = store.is_practiced(this.properties.idata[0])//practiced
+    var r = []
     if (is_practiced)
     {
-      is_show_answer = true
+      r = core.parctice_tap_confirm_or_exam_show_mode_or_exam_full_submit(this.properties.idata, this.properties.mode, selected_idx)
+      r[9] = true
+      console.log("is_practiced")
     }
-    let r = core.data_state_change(this.properties.idata, this.properties.mode, selected_idx)
-    //console.log("dddddddddd",r)
-    r[9] = store.is_practiced(r[0])//practiced
-    //console.log(r)
+    else
+    {
+      r = core.data_state_change(this.properties.idata, this.properties.mode, selected_idx)
+      r[9] = false
+    }
     that.setData({data:r})
-    //console.log("eeeeeeeeee",r)
   }
   else if (this.properties.mode == "exam")
   {

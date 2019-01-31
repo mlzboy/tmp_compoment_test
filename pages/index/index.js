@@ -18,6 +18,9 @@ Page({
   onLoad: function (params) {
     console.log(params.exam_no)
     console.log(params.course)
+    wx.setNavigationBarTitle({
+      title: params.course+params.exam_no
+    })
 
 
   },

@@ -36,13 +36,14 @@
   </block>
 </view>
 <view class="br"></view>
-
+<block wx:if="{{data[9] == true}}">
 <view class="memory_header">
 <view class="memory_icon"></view>
 <view class="memory_title">记忆技巧</view>
 </view> 
+<!--
 <view class="line"></view>
-
+-->
 <view class="memory_content">
  <block wx:if="{{is_vip==false}}">
 <image src="/images/vip.png" mode="widthFix"></image>
@@ -51,6 +52,9 @@
 {{data[6]}}
 </block>
 </view>
+<!--
 <view class="br"></view>
+-->
+</block>
 
 </scroll-view>
