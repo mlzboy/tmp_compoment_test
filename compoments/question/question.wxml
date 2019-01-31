@@ -15,7 +15,7 @@
   <text class="question">{{data[2]}}</text>
 </view>
 <view class="main">
-<block  wx:for="{{data[1]}}" wx:for-index="idx" wx:for-item="answer">
+<block  wx:for="{{data[1]}}" wx:for-index="idx" wx:for-item="answer" wx:key="{{answer[2]}}">
   <view data-idx="{{idx}}" class="option{{answer[5]}}" bindtap='tap_select'>
 
     <rich-text nodes="<div class='circle {{answer[4]}}'>{{answer[2]}}</div>"></rich-text> 

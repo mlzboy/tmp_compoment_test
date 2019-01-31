@@ -14,7 +14,7 @@ Component({
   properties: {
     is_show_answer:{type:Boolean,value:false},
     is_vip:{type:Boolean,value:true},
-    mode:{type:String,value:"memory_normal"},//practice,exam,exam_show,memory_normal,memory_vip
+    mode:{type:String,value:"practice"},//practice,exam,exam_show,memory_normal,memory_vip
      /*typ:{type:String,value:"mutiple"},
     question:{type:String,value:'aaaaa'},
     answers:{type:Array,value:["aaaa","bbb"]},*/
@@ -69,11 +69,11 @@ ready:function(){
   }
   else if (this.properties.mode == "exam")
   {
-    let selected_idx = store.get(this.properties.idata[0])
+    let selected_idx = store.sget(this.properties.mode,this.properties.idata[0])
     let is_show_answer = this.properties.is_show_answer
 
     let r = core.data_state_change(this.properties.idata, this.properties.mode, selected_idx)
-    r[9] = store.is_practiced(r[0])//practiced
+    r[9] = false//not examed
     console.log(r)
     that.setData({ data: r })   
   }
@@ -104,10 +104,14 @@ ready:function(){
       if (((mode == "practice") && (_fulldata[4] == "M")) || (mode == "exam_show"))//出结果
       {
       */
-        let selected_idx = store.get(this.properties.idata[0])
+        let selected_idx = store.sget(this.properties.mode,this.properties.idata[0])
         let r = core.parctice_tap_confirm_or_exam_show_mode_or_exam_full_submit(this.properties.idata, this.properties.mode, selected_idx)
+        if (this.properties.mode == "practice") {
+          store.add_practiced(this.properties.idata[0])
+          r[9] = true //practiced
+        }
         that.setData({ data: r }) 
-        
+
         console.log("tap_confirm:",r)
       /*
       } 
@@ -116,7 +120,7 @@ ready:function(){
 
 
     tap_select: function (e) {
-      if (this.properties.mode == "memory_normal" || this.properties.mode == "memory_vip" || this.properties.mode =="exam_show" || store.is_practiced(this.properties.idata[0])==true)
+      if (this.properties.mode == "memory_normal" || this.properties.mode == "memory_vip" || this.properties.mode =="exam_show" || (store.is_practiced(this.properties.idata[0])==true && this.properties.mode == "practice"))
       {
         return
       }
@@ -127,11 +131,11 @@ ready:function(){
       if (this.properties.idata[4] == 'M')//多选
       {
         console.log("tttttttttttt")
-        store.set(this.properties.idata[0],idx)
-        let selected_idx = store.get(this.properties.idata[0])
+        store.mset(this.properties.mode,this.properties.idata[0],idx)
+        let selected_idx = store.sget(this.properties.mode,this.properties.idata[0])
         console.log(selected_idx)
         let r = core.data_state_change(this.properties.idata, this.properties.mode, selected_idx)
-        r[9] = false//practiced
+        r[9] = false//exam
         console.log("==================>>>")
         console.log(r)
         that.setData({ data: r })    

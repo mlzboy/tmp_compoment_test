@@ -1,0 +1,353 @@
+<scroll-view scroll-x="true" class="weui-navbar">
+<view id="1" class="default-item {{current_idx == 1 ? 'item_on':''}}" bindtap='tabClick'>大学心理学</view>
+<view id="2" class="default-item {{current_idx == 2 ? 'item_on':''}}" bindtap='tabClick'>高等教育法规</view>
+<view id="3" class="default-item {{current_idx == 3 ? 'item_on':''}}" bindtap='tabClick'>大学教育学</view>
+<view id="4" class="default-item {{current_idx == 4 ? 'item_on':''}}" bindtap='tabClick'>教师伦理学</view>
+   <view class="weui-navbar-slider {{cls}}" style="width:{{width}}rpx;transform:translateX({{offset}}rpx);"></view>
+</scroll-view>
+
+  <view class="memory_header">
+    <view class="memory_icon {{cls}}"></view>
+    <view class="memory_title">题库</view>
+  </view> 
+<view class="hidden {{current_idx == 1 ? 'on':''}}">
+
+
+  <scroll-view scroll-x="true" class="sv">
+    <view class="block_test">
+    <navigator url="/pages/index/index?course=大学心理学&exam_no=0" open-type="navigate" hover-class="none">
+      <view class="icon_test {{cls}}">做</view>
+      <view class="text_test">卷一</view>
+    </navigator>
+      <view class="icon_test {{cls}}">学</view>
+      <view class="text_test">卷一</view>
+    </view>
+    <view class="block_test">
+      <view class="icon_test {{cls}}">生</view>
+      <view class="text_test">卷一</view>
+
+      <view class="icon_test {{cls}}">锤</view>
+      <view class="text_test">卷一</view>
+    </view>
+    <view class="block_test">
+      <view class="icon_test {{cls}}">炼</view>
+      <view class="text_test">卷一</view>
+
+      <view class="icon_test {{cls}}">品</view>
+      <view class="text_test">卷一</view>
+    </view>
+    <view class="block_test">
+      <view class="icon_test {{cls}}">格</view>
+      <view class="text_test">卷一</view>
+
+      <view class="icon_test {{cls}}">的</view>
+      <view class="text_test">卷一</view>
+    </view>
+    <view class="block_test">
+      <view class="icon_test {{cls}}">引</view>
+      <view class="text_test">卷一</view>
+
+      <view class="icon_test {{cls}}">路</view>
+      <view class="text_test">卷一</view>
+    </view>
+    <view class="block_test">
+      <view class="icon_test {{cls}}">人</view>
+      <view class="text_test">卷一</view>
+
+      <view class="icon_test {{cls}}">做</view>
+      <view class="text_test">卷一</view>
+    </view>
+    <view class="block_test">
+      <view class="icon_test {{cls}}">学</view>
+      <view class="text_test">卷一</view>
+
+      <view class="icon_test {{cls}}">生</view>
+      <view class="text_test">卷一</view>
+    </view>
+    <view class="block_test">
+      <view class="icon_test {{cls}}">学</view>
+      <view class="text_test">卷一</view>
+
+      <view class="icon_test {{cls}}">习</view>
+      <view class="text_test">卷一</view>
+    </view>
+    <view class="block_test">
+      <view class="icon_test {{cls}}">知</view>
+      <view class="text_test">卷一</view>
+
+      <view class="icon_test {{cls}}">识</view>
+      <view class="text_test">卷一</view>
+    </view>
+    <view class="block_test">
+      <view class="icon_test {{cls}}">的</view>
+      <view class="text_test">卷一</view>
+
+      <view class="icon_test {{cls}}">引</view>
+      <view class="text_test">卷一</view>
+    </view>
+    <view class="block_test">
+      <view class="icon_test {{cls}}">路</view>
+      <view class="text_test">卷一</view>
+
+      <view class="icon_test {{cls}}">人</view>
+      <view class="text_test">卷一</view>
+    </view>
+  </scroll-view>
+
+  </view>
+
+
+
+
+
+
+<view class="hidden {{current_idx == 2 ? 'on':''}}">
+  <scroll-view scroll-x="true" class="sv">
+        <view class="block_test">
+          <view class="icon_test {{cls}}">做</view>
+          <view class="text_test">卷一</view>
+          <view class="icon_test {{cls}}">学</view>
+          <view class="text_test">卷一</view>
+        </view>
+        <view class="block_test">
+          <view class="icon_test {{cls}}">生</view>
+          <view class="text_test">卷一</view>
+          <view class="icon_test {{cls}}">创</view>
+          <view class="text_test">卷一</view>
+        </view>
+        <view class="block_test">
+        <view class="icon_test {{cls}}">新</view>
+        <view class="text_test">卷一</view>
+        <view class="icon_test {{cls}}">思</view>
+        <view class="text_test">卷一</view>
+        </view>
+        <view class="block_test">
+        <view class="icon_test {{cls}}">维</view>
+        <view class="text_test">卷一</view>
+        <view class="icon_test {{cls}}">的</view>
+        <view class="text_test">卷一</view>
+        </view>
+        <view class="block_test">
+        <view class="icon_test {{cls}}">引</view>
+        <view class="text_test">卷一</view>
+        <view class="icon_test {{cls}}">路</view>
+        <view class="text_test">卷一</view>
+        </view>
+        <view class="block_test">
+        <view class="icon_test {{cls}}">人</view>
+        <view class="text_test">卷一</view>
+        <view class="icon_test {{cls}}">做</view>
+        <view class="text_test">卷一</view>
+        </view>
+        <view class="block_test">
+        <view class="icon_test {{cls}}">学</view>
+        <view class="text_test">卷一</view>
+        <view class="icon_test {{cls}}">生</view>
+        <view class="text_test">卷一</view>
+        </view>
+        <view class="block_test">
+        <view class="icon_test {{cls}}">奉</view>
+        <view class="text_test">卷一</view>
+        <view class="icon_test {{cls}}">献</view>
+        <view class="text_test">卷一</view>
+        </view>
+        <view class="block_test">
+        <view class="icon_test {{cls}}">祖</view>
+        <view class="text_test">卷一</view>
+        <view class="icon_test {{cls}}">国</view>
+        <view class="text_test">卷一</view>
+        </view>
+        <view class="block_test">
+        <view class="icon_test {{cls}}">的</view>
+        <view class="text_test">卷一</view>
+        <view class="icon_test {{cls}}">引</view>
+        <view class="text_test">卷一</view>
+        </view>
+        <view class="block_test">
+        <view class="icon_test {{cls}}">路</view>
+        <view class="text_test">卷一</view>
+        <view class="icon_test {{cls}}">人</view>
+        <view class="text_test">卷一</view>
+        </view>
+  </scroll-view>
+</view>
+
+<view class="hidden {{current_idx == 3 ? 'on':''}}">
+  <scroll-view scroll-x="true" class="sv">
+
+      <view class="block_test">
+      <view class="icon_test {{cls}}">有</view>
+      <view class="text_test">卷一</view>
+      <view class="icon_test {{cls}}">理</view>
+      <view class="text_test">卷一</view>
+      </view>
+      <view class="block_test">
+      <view class="icon_test {{cls}}">想</view>
+      <view class="text_test">卷一</view>
+      <view class="icon_test {{cls}}">信</view>
+      <view class="text_test">卷一</view>
+      </view>
+      <view class="block_test">
+      <view class="icon_test {{cls}}">念</view>
+      <view class="text_test">卷一</view>
+      <view class="icon_test {{cls}}">有</view>
+      <view class="text_test">卷一</view>
+      </view>
+      <view class="block_test">
+      <view class="icon_test {{cls}}">道</view>
+      <view class="text_test">卷一</view>
+      <view class="icon_test {{cls}}">德</view>
+      <view class="text_test">卷一</view>
+      </view>
+      <view class="block_test">
+      <view class="icon_test {{cls}}">情</view>
+      <view class="text_test">卷一</view>
+      <view class="icon_test {{cls}}">操</view>
+      <view class="text_test">卷一</view>
+      </view>
+
+      <view class="block_test">
+      <view class="icon_test {{cls}}">有</view>
+      <view class="text_test">卷一</view>
+      <view class="icon_test {{cls}}">扎</view>
+      <view class="text_test">卷一</view>
+      </view>
+      <view class="block_test">
+      <view class="icon_test {{cls}}">实</view>
+      <view class="text_test">卷一</view>
+      <view class="icon_test {{cls}}">学</view>
+      <view class="text_test">卷一</view>
+      </view>
+      <view class="block_test">
+      <view class="icon_test {{cls}}">识</view>
+      <view class="text_test">卷一</view>
+      <view class="icon_test {{cls}}">有</view>
+      <view class="text_test">卷一</view>
+      </view>
+      <view class="block_test">
+      <view class="icon_test {{cls}}">仁</view>
+      <view class="text_test">卷一</view>
+      <view class="icon_test {{cls}}">爱</view>
+      <view class="text_test">卷一</view>
+      </view>
+      <view class="block_test">
+      <view class="icon_test {{cls}}">之</view>
+      <view class="text_test">卷一</view>
+      <view class="icon_test {{cls}}">心</view>
+      <view class="text_test">卷一</view>
+      </view>
+
+  </scroll-view>
+</view>
+
+
+<view class="hidden {{current_idx == 4 ? 'on':''}}">
+  <scroll-view scroll-x="true" class="sv">
+
+      <view class="block_test">
+      <view class="icon_test {{cls}}">坚</view>
+      <view class="text_test">卷一</view>
+      <view class="icon_test {{cls}}">持</view>
+      <view class="text_test">卷一</view>
+      </view>
+      <view class="block_test">
+      <view class="icon_test {{cls}}">教</view>
+      <view class="text_test">卷一</view>
+      <view class="icon_test {{cls}}">书</view>
+      <view class="text_test">卷一</view>
+      </view>
+      <view class="block_test">
+      <view class="icon_test {{cls}}">和</view>
+      <view class="text_test">卷一</view>
+      <view class="icon_test {{cls}}">育</view>
+      <view class="text_test">卷一</view>
+      </view>
+      <view class="block_test">
+      <view class="icon_test {{cls}}">人</view>
+      <view class="text_test">卷一</view>
+      <view class="icon_test {{cls}}">相</view>
+      <view class="text_test">卷一</view>
+      </view>
+      <view class="block_test">
+      <view class="icon_test {{cls}}">统</view>
+      <view class="text_test">卷一</view>
+      <view class="icon_test {{cls}}">一</view>
+      <view class="text_test">卷一</view>
+      </view>
+
+      <view class="block_test">
+      <view class="icon_test {{cls}}">坚</view>
+      <view class="text_test">卷一</view>
+      <view class="icon_test {{cls}}">持</view>
+      <view class="text_test">卷一</view>
+      </view>
+      <view class="block_test">
+      <view class="icon_test {{cls}}">言</view>
+      <view class="text_test">卷一</view>
+      <view class="icon_test {{cls}}">传</view>
+      <view class="text_test">卷一</view>
+      </view>
+      <view class="block_test">
+      <view class="icon_test {{cls}}">和</view>
+      <view class="text_test">卷一</view>
+      <view class="icon_test {{cls}}">身</view>
+      <view class="text_test">卷一</view>
+      </view>
+      <view class="block_test">
+      <view class="icon_test {{cls}}">教</view>
+      <view class="text_test">卷一</view>
+      <view class="icon_test {{cls}}">相</view>
+      <view class="text_test">卷一</view>
+      </view>
+      <view class="block_test">
+      <view class="icon_test {{cls}}">统</view>
+      <view class="text_test">卷一</view>
+      <view class="icon_test {{cls}}">一</view>
+      <view class="text_test">卷一</view>
+      </view>
+
+  </scroll-view>
+</view>
+
+
+
+<view id="{{current_idx}}" bindtouchstart="touchStart" bindtouchmove="touchMove" bindtouchend="touchEnd">
+  <view class="memory_header">
+    <view class="memory_icon {{cls}}"></view>
+    <view class="memory_title">专项练习</view>
+  </view> 
+  <view class="sv2">
+  <navigator url="/pages/index/index?type=single" open-type="navigate" hover-class="none">
+    <view class="block_test">
+    <view class="icon_test {{cls}}">单</view>
+    <view class="text_test">单选题</view>
+    </view>
+  </navigator>
+  <navigator url="/pages/index/index?type=mutiple" open-type="navigate" hover-class="none">  
+    <view class="block_test">
+    <view class="icon_test {{cls}}">多</view>
+    <view class="text_test">多选题</view>
+    </view>
+ </navigator>
+<navigator url="/pages/index/index?type=juge" open-type="navigate" hover-class="none">  
+    <view class="block_test">
+    <view class="icon_test {{cls}}">判</view>
+    <view class="text_test">判断题</view>
+    </view>
+</navigator>
+  </view>
+  <view class="memory_header">
+    <view class="memory_icon {{cls}}"></view>
+    <view class="memory_title">专项练习</view>
+  </view> 
+  <view class="sv2">
+    <view class="block_test">
+    <view class="icon_test {{cls}}">错</view>
+    <view class="text_test">错题集</view>
+    </view>
+    <view class="block_test">
+    <view class="icon_test {{cls}}">藏</view>
+    <view class="text_test">收藏题</view>
+    </view>
+  </view>
+</view>

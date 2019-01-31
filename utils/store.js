@@ -54,17 +54,18 @@ function sset(key_prefix,id,idx)
   return list
 }
 
+
 /*
 反向操作，存在则删除，不存在则添加
 针对多选，建议改名为mset
 */
-function set(id,idx)
+function mset(key_prefix,id,idx)
 {
   var list = [];
   //判断localstorage是否有id的key,有的话取其值
-  if (_has_key(id))
+  if (_has_key(key_prefix+id))
   {
-    list = _get(id)
+    list = _get(key_prefix+id)
     let ret = list.indexOf(idx)
     if (ret > -1)
     {
@@ -80,9 +81,11 @@ function set(id,idx)
   {
     list.push(idx)
   }
-  _set(id, list)
+  _set(key_prefix+id, list)
   return list
 }
+
+
 
 
 function _set(key,value)
@@ -116,7 +119,7 @@ function _has_key(key)
 
 module.exports = {
   sset:sset,
-  set: set,
+  mset:mset,
   sget: sget,//以后改为get
   get:_get,
   is_practiced:is_practiced,
