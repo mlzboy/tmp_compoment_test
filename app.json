@@ -1,6 +1,6 @@
 {
   "pages":[
-    "pages/index/index",
+    "pages/exam/index",
     "pages/home/index",
     "pages/logs/logs"
   ],

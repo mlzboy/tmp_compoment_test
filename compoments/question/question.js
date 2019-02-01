@@ -12,9 +12,9 @@ Component({
    * 组件的属性列表
    */
   properties: {
-    is_show_answer:{type:Boolean,value:false},
+    //is_show_answer:{type:Boolean,value:false},
     is_vip:{type:Boolean,value:true},
-    mode:{type:String,value:"exam"},//practice,exam,exam_show,memory_normal,memory_vip
+    mode:{type:String,value:"practice"},//practice,exam,exam_show,memory_normal,memory_vip
      /*typ:{type:String,value:"mutiple"},
     question:{type:String,value:'aaaaa'},
     answers:{type:Array,value:["aaaa","bbb"]},*/
@@ -31,7 +31,7 @@ Component({
         "BC",
         "M",
         "大学心理学",
-        "memory tips",
+        "素质教育",
         /*
         "",//确定按钮颜色 
         false,//是否显示确认按钮

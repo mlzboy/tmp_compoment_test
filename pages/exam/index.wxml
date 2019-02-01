@@ -1,0 +1,55 @@
+<scroll-view style="height:400rpx" scroll-y="true">
+<block  wx:for="{{list}}" wx:for-index="idx" wx:for-item="idata" wx:key="{{idata[0]}}">
+<c-question is_vip="{{is_vip}}" idata="{{idata}}" mode="{{mode}}"></c-question>
+</block>
+</scroll-view>
+<view class="header2">
+<i-count-down
+            target="{{targetTime2}}"
+            bindcallback="myLinsterner"
+            clear-timer="{{clearTimer}}"
+            class="title3"
+    ></i-count-down>
+    <text class="content3">交卷</text>
+    <text class="content3" bindtap='anchor'>锚点</text>
+</view>
+
+
+<view class="option" style="display:none">
+<text class="circle white">1</text><text class="circle white">2</text>
+<text class="circle white">1</text><text class="circle white">1</text><text class="circle white">1</text><text class="circle white">1</text><text class="circle white">1</text><text class="circle white">1</text><text class="circle white">1</text><text class="circle white">1</text><text class="circle white">1</text>
+<text class="circle white">1</text>
+<text class="circle white">1</text>
+<text class="circle white">1</text>
+<text class="circle white">1</text><text class="circle white">1</text>
+<text class="circle white">1</text>
+<text class="circle white">1</text><text class="circle white">1</text>
+<text class="circle white">1</text>
+<text class="circle white">1</text><text class="circle white">1</text>
+<text class="circle white">1</text>
+<text class="circle white">1</text><text class="circle white">1</text>
+<text class="circle white">1</text>
+<text class="circle white">1</text><text class="circle white">1</text>
+<text class="circle white">1</text>
+<text class="circle white">1</text><text class="circle white">1</text>
+<text class="circle white">1</text>
+<text class="circle white">1</text><text class="circle white">1</text>
+<text class="circle white">1</text>
+<text class="circle white">1</text><text class="circle white">1</text>
+<text class="circle white">1</text>
+<text class="circle white">1</text><text class="circle white">1</text>
+<text class="circle white">1</text>
+<text class="circle white">1</text><text class="circle white">1</text>
+<text class="circle white">1</text>
+<text class="circle white">1</text><text class="circle white">1</text>
+<text class="circle white">1</text>
+<text class="circle white">1</text><text class="circle white">1</text>
+<text class="circle white">1</text>
+<text class="circle white">1</text><text class="circle white">1</text>
+<text class="circle white">1</text>
+<text class="circle white">1</text><text class="circle white">1</text>
+<text class="circle white">1</text>
+<text class="circle white">1</text>
+<text class="circle white">1</text>
+</view>
+     

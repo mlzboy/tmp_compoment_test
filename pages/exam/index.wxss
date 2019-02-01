@@ -32,7 +32,7 @@ line-height: 60rpx;
 }
 
 
-.option
+.option2
 {
 display: float;
 padding: 25rpx 40rpx 25rpx 40rpx;
@@ -46,12 +46,7 @@ height: 60rpx;
 font-size: 42rpx;
 text-align: center;
 line-height: 60rpx;
-position: absolute;
-top: 0;
-left: 40rpx;
-right: 0;
-bottom: 0;
-margin:auto 0;
+margin:0 0 40rpx 40rpx
 }
 .answer
 {
@@ -218,6 +213,53 @@ font-size: 42rpx;
 line-height: 60rpx;
 word-break: break-all;
 width: 550rpx;
+}
+.title3
+{
+width:120rpx;
+margin:0 0 10rpx 0;
+font-size: 42rpx;
+line-height: 60rpx;
+}
+
+.clear
+{
+clear:both;
+height:0;
+}
+
+
+.option
+{
+justify-content:flex-start;
+display: flex;
+flex-direction:row;
+flex-wrap: wrap;
+}
+
+.header2
+{
+display:flex;
+justify-content: flex-start;
+flex-direction:row;
+flex-wrap:nowrap;
+margin: 0 40rpx 20rpx 40rpx;
+color:#00c355;
+}
+.header3
+{
+display:flex;
+justify-content:center;
+flex-direction:row;
+flex-wrap:wrap;
+margin: 0 40rpx 40rpx 40rpx;
+}
+.content3
+{
+margin:0 0 10rpx 0;
+font-size: 42rpx;
+line-height: 60rpx;
+word-break: break-all;
 }
 .title3
 {

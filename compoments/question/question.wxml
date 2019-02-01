@@ -35,26 +35,15 @@
   </view>
   </block>
 </view>
-<view class="br"></view>
-<block wx:if="{{data[9] == true}}">
-<view class="memory_header">
-<view class="memory_icon"></view>
-<view class="memory_title">记忆技巧</view>
-</view> 
-<!--
-<view class="line"></view>
--->
-<view class="memory_content">
- <block wx:if="{{is_vip==false}}">
-<image src="/images/vip.png" mode="widthFix"></image>
-</block>
-<block wx:else>
-{{data[6]}}
-</block>
-</view>
-<!--
-<view class="br"></view>
--->
-</block>
 
+<block wx:if="{{data[9] == true}}">
+<view class="header2">
+  <text class="title3"> 答案：</text>
+  <text class="content3"> {{data[3]}}</text>
+</view>
+<view class="header2">
+  <text class="title3"> 技巧：</text>
+  <text class="content3"> <block wx:if="{{is_vip == true}}">技巧：技巧：技巧：技巧：技巧：技巧：技巧：技巧：技巧</block><block wx:else>你好aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</block></text>
+</view>
+</block>
 </scroll-view>
