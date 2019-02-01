@@ -38,10 +38,10 @@ function highlight_answer(answer) {
     //基于以上两个变量，进行标红
     var tokens = []
     list.reduce(_is_highlight)
-    console.log("tokens:", tokens)
+    //console.log("tokens:", tokens)
     answer[0] = tokens.join("")
   }
-  console.log(answer)
+  //console.log(answer)
   return answer
 
 
@@ -146,7 +146,7 @@ function parctice_tap_confirm_or_exam_show_mode_or_exam_full_submit(fulldata, mo
       store.add_practiced(_fulldata[0])
       _fulldata[9] = true;//practiced
     }
-    console.log("zzzzzzzzzzzzzzzzzzzzzz")
+    //console.log("zzzzzzzzzzzzzzzzzzzzzz")
     _gave_answer_and_remaker_wrong_answer(answers, right_answers, selected_idxs);
     return _fulldata
     //console.log(answers)
@@ -228,7 +228,7 @@ function data_state_change(fulldata, mode, selected_idxs) {
         answers[i].push(" white")//选项A颜色
       }
       answers[i].push("")//整行背景色
-      console.log(answers[i])
+      //console.log(answers[i])
     }
   }
   else if (mode == "memory_vip") {
@@ -291,10 +291,10 @@ function data_state_change(fulldata, mode, selected_idxs) {
 
   _fulldata[1] = answers
  // console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
-  for (let i = 0; i < answers.length; ++i) {
+  //for (let i = 0; i < answers.length; ++i) {
     //console.log(answers[i])
 
-  }
+  //}
 
 
   return _fulldata
@@ -319,7 +319,7 @@ function _gave_selected_options_gray_backgroud(answers, selected_idxs) {
       answers[i].push(" white"); //选项A颜色
       answers[i].push(""); //整行背景色
     }
-    console.log(answers[i]);
+    //console.log(answers[i]);
   }
 }
 

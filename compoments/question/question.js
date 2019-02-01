@@ -61,7 +61,7 @@ ready:function(){
     {
       r = core.parctice_tap_confirm_or_exam_show_mode_or_exam_full_submit(this.properties.idata, this.properties.mode, selected_idx)
       r[9] = true
-      console.log("is_practiced")
+      //console.log("is_practiced")
     }
     else
     {
@@ -77,17 +77,17 @@ ready:function(){
 
     let r = core.data_state_change(this.properties.idata, this.properties.mode, selected_idx)
     r[9] = false//not examed
-    console.log(r)
+    //console.log(r)
     that.setData({ data: r })   
   }
   else if (this.properties.mode == "exam_show")
   {
     let selected_idx = store.sget("exam",this.properties.idata[0])
-    console.log("exam_show",selected_idx)
+    //console.log("exam_show",selected_idx)
     let r = core.parctice_tap_confirm_or_exam_show_mode_or_exam_full_submit(this.properties.idata, this.properties.mode, selected_idx)
     //r[9] = true //examed
     //exam模式整体提交的时候，执行add_examed每道题
-    console.log(r)
+    //console.log(r)
     that.setData({ data: r })   
   }
   else
@@ -115,7 +115,7 @@ ready:function(){
         }
         that.setData({ data: r }) 
 
-        console.log("tap_confirm:",r)
+        //console.log("tap_confirm:",r)
       /*
       } 
       */
@@ -133,16 +133,16 @@ ready:function(){
       //practice or exam mode 选中变灰色，已选中的变不选中
       if (this.properties.idata[4] == 'M')//多选
       {
-        console.log("tttttttttttt")
+        //console.log("tttttttttttt")
         store.mset(this.properties.mode,this.properties.idata[0],idx)
         let selected_idx = store.sget(this.properties.mode,this.properties.idata[0])
-        console.log(selected_idx)
+        //console.log(selected_idx)
         let r = core.data_state_change(this.properties.idata, this.properties.mode, selected_idx)
         r[9] = false//exam
-        console.log("==================>>>")
-        console.log(r)
+        //console.log("==================>>>")
+        //console.log(r)
         that.setData({ data: r })    
-        console.log("ttttttttttttttttt")
+        //console.log("ttttttttttttttttt")
         return 
       }
 
@@ -151,7 +151,7 @@ ready:function(){
         {
           store.sset(this.properties.mode,this.properties.idata[0], idx)
           let selected_idx = store.sget(this.properties.mode,this.properties.idata[0])
-          console.log("zzz",selected_idx)
+          //console.log("zzz",selected_idx)
           let r = core.data_state_change(this.properties.idata, this.properties.mode, selected_idx)
 
           if (this.data.mode == "practice")
@@ -170,15 +170,15 @@ ready:function(){
       }
     },
     transform(data,mode) {
-      console.log(data)
+      //console.log(data)
       //return data;
       var answers = data[1]
       if (mode == "highlight")
       {
-        console.log("------------------")
+        //console.log("------------------")
         let _answers = core.highlight_answers(answers)
         data[1] = core.add_answer_char(_answers)
-        console.log(data);      
+        //console.log(data);      
         return data;
       }
       data[1] = core.add_answer_char(answers)

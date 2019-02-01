@@ -7,6 +7,7 @@ const app = getApp()
 var exam_no = -1
 var course = ""
 var page = 0
+var list=[]
 Page({
   data: {
     current_page:0,
@@ -49,14 +50,12 @@ Page({
       title: params.course+params.exam_no
     })
     page +=1
-    let list = []
+    list = []
     for(let i = 0 ; i < current_exam_idx.length; ++i)
     {
       list.push(forward_idxs.forward_idxs[current_exam_idx[i]])
     }
-
-
-
+   
     console.log("===",list.length)
     //list =[this.data.idata,this.data.idata]
     this.setData({list:list,is_vip:false,mode:"exam",
@@ -68,6 +67,7 @@ Page({
   },
   anchor(){
     console.log("zzz")
+    this.setData({toview:"t20"})
   },
   myLinsterner(e) {
    console.log("icountdown finished")
@@ -85,7 +85,8 @@ Page({
     console.log(current_page)
     let idata = forward_idxs.forward_idxs[current_exam_idx[current_page]]
     console.log(idata)
-    this.setData({ idata: idata })
+    list = list.concat(list)
+    this.setData({ list: list })
 
   }
 })

@@ -1,6 +1,8 @@
-<scroll-view style="height:400rpx" scroll-y="true">
+<scroll-view style="height:800rpx" scroll-y="true" lower-threshold="50" bindscrolltolower="loadmore" scroll-into-view="{{toview}}">
 <block  wx:for="{{list}}" wx:for-index="idx" wx:for-item="idata" wx:key="{{idata[0]}}">
+<view id="t{{idx+1}}">
 <c-question is_vip="{{is_vip}}" idata="{{idata}}" mode="{{mode}}"></c-question>
+</view>
 </block>
 </scroll-view>
 <view class="header2">
