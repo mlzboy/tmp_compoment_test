@@ -23,52 +23,14 @@
 <!-- 弹出框 -->
 <view class="tck {{downAni?'down':'up'}}">
 <view class="header3">
-<i-count-down
-            target="{{targetTime2}}"
-            bindcallback="myLinsterner"
-            clear-timer="{{clearTimer}}"
-            class="title3"
-    ></i-count-down>
-    <text class="content3">交卷</text>
-    <text class="content3" bindtap='anchor'>锚点</text>
+  <i-count-down target="{{targetTime2}}" bindcallback="myLinsterner" clear-timer="{{clearTimer}}" class="title3"></i-count-down>
+  <text>交卷</text><text bindtap='anchor'>锚点</text>
 </view>
 <scroll-view scroll-y="true" style="height:300rpx" >
 <view class="option">
-<text class="circle white">1</text><text class="circle white">2</text>
-<text class="circle white">1</text><text class="circle white">1</text><text class="circle white">1</text><text class="circle white">1</text><text class="circle white">1</text><text class="circle white">1</text><text class="circle white">1</text><text class="circle white">1</text><text class="circle white">1</text>
-<text class="circle white">1</text>
-<text class="circle white">1</text>
-<text class="circle white">1</text>
-<text class="circle white">1</text><text class="circle white">1</text>
-<text class="circle white">1</text>
-<text class="circle white">1</text><text class="circle white">1</text>
-<text class="circle white">1</text>
-<text class="circle white">1</text><text class="circle white">1</text>
-<text class="circle white">1</text>
-<text class="circle white">1</text><text class="circle white">1</text>
-<text class="circle white">1</text>
-<text class="circle white">1</text><text class="circle white">1</text>
-<text class="circle white">1</text>
-<text class="circle white">1</text><text class="circle white">1</text>
-<text class="circle white">1</text>
-<text class="circle white">1</text><text class="circle white">1</text>
-<text class="circle white">1</text>
-<text class="circle white">1</text><text class="circle white">1</text>
-<text class="circle white">1</text>
-<text class="circle white">1</text><text class="circle white">1</text>
-<text class="circle white">1</text>
-<text class="circle white">1</text><text class="circle white">1</text>
-<text class="circle white">1</text>
-<text class="circle white">1</text><text class="circle white">1</text>
-<text class="circle white">1</text>
-<text class="circle white">1</text><text class="circle white">1</text>
-<text class="circle white">1</text>
-<text class="circle white">1</text><text class="circle white">1</text>
-<text class="circle white">1</text>
-<text class="circle white">1</text><text class="circle white">1</text>
-<text class="circle white">1</text>
-<text class="circle white">1</text>
-<text class="circle white">1</text>
+<block  wx:for="{{list}}" wx:for-index="idx" wx:for-item="idata" wx:key="{{idata[0]}}">
+<text class="circle white">{{idx+1}}</text>
+</block>
 </view>
 </scroll-view>
 
