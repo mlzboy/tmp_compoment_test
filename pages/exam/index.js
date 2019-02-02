@@ -10,6 +10,10 @@ var page = 0
 var list=[]
 Page({
   data: {
+    grids: [0, 1, 2, 3, 4, 5],
+    showView: false,
+    downAni: false,
+
     current_page:0,
     mode: 'exam',
     idata: [
@@ -68,6 +72,12 @@ Page({
   anchor(){
     console.log("zzz")
     this.setData({toview:"t20"})
+
+    //展开隐藏菜单
+    this.setData({
+      showView: true,
+      downAni: false
+    });
   },
   myLinsterner(e) {
    console.log("icountdown finished")
@@ -88,5 +98,38 @@ Page({
     list = list.concat(list)
     this.setData({ list: list })
 
-  }
+  },
+  tabClick: function (e) {
+    this.setData({
+      activeIndex: e.currentTarget.id
+    });
+  },
+
+  tabClickQxup: function (e) {
+    this.setData({
+      showView: true,
+      downAni: false
+    });
+  },
+  tabClickQxdown: function (e) {
+    console.log(e);
+
+    var types = e.currentTarget.dataset.hef;
+    if (types) {
+      var states = false;
+      var downAni = true;
+    } else {
+      var states = true;
+      var downAni = false;
+    }
+    this.setData({
+      downAni: downAni
+    });
+    var qthis = this;
+    setTimeout(function () {
+      qthis.setData({
+        showView: states,
+      });
+    }, 250);
+  },
 })

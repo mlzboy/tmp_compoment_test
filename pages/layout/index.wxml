@@ -1,0 +1,3 @@
+<!--pages/layout/index.wxml-->
+<scroll-view class="a">bbbbb</scroll-view> 
+<view class="b">2222</view>
