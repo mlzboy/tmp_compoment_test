@@ -1,5 +1,5 @@
 <!--lower-threshold="50" bindscrolltolower="loadmore"-->
-<scroll-view style="height:1000rpx" scroll-y="true"  scroll-into-view="{{toview}}">
+<scroll-view class="aa" scroll-y="true"  scroll-into-view="{{toview}}">
 <block  wx:for="{{list}}" wx:for-index="idx" wx:for-item="idata" wx:key="{{idata[0]}}">
 <view id="t{{idx+1}}">
 <c-question is_vip="{{is_vip}}" idata="{{idata}}" mode="{{mode}}"></c-question>
@@ -11,7 +11,7 @@
 
 
 
-<view class="tck">
+<view class="bb">
 
   <view class="header2{{!showView?' tck-show':' tck-hide'}}">
   <i-count-down target="{{targetTime2}}" bindcallback="myLinsterner" clear-timer="{{clearTimer}}" class="title3"></i-count-down>

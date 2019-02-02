@@ -284,11 +284,6 @@ height:0;
 
 
 
-page{
-  display: flex;
-  flex-direction: column-reverse;
-  height: 100%;
-}
 
 .top{
   background: #ffffff;
@@ -440,3 +435,16 @@ page{
     }
   }
  
+ .aa
+ {
+   /*height:1000rpx;*/
+   position: absolute;
+   bottom:80rpx;
+   top:0;
+   
+ }
+ .bb{
+    position: absolute;
+    height: 80rpx;
+    width: 100vw;
+}
