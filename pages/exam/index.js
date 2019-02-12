@@ -15,7 +15,7 @@ Page({
     downAni: false,
 
     current_page:0,
-    mode: 'exam',
+    mode: 'memory_vip',
     idata: [
       9091,
       [
@@ -62,7 +62,7 @@ Page({
    
     console.log("===",list.length)
     //list =[this.data.idata,this.data.idata]
-    this.setData({list:list,is_vip:false,mode:"exam",
+    this.setData({list:list,is_vip:false,mode:this.data.mode,
       targetTime2: new Date().getTime() + 30 * 60 * 1000
     })
  
