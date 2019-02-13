@@ -17,7 +17,7 @@ Page({
     downAni: false,
 
     current_page:0,
-    mode: 'memory_vip',
+    mode: 'exam',
     idata: [
       9091,
       [

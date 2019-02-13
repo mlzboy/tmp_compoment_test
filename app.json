@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/xsl/index",
     "pages/exam/index",
     "pages/home/index",
     "pages/logs/logs",
@@ -10,5 +11,24 @@
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "lightgray",
+    "selectedColor": "#00c355",
+    "backgroundColor": "#FFFFFF",
+    "list": [
+      {
+        "pagePath": "pages/home/index",
+        "text": "岗培",
+        "iconPath": "images/gp2.png",
+        "selectedIconPath": "images/gp1.png"
+      },
+      {
+        "pagePath": "pages/xsl/index",
+        "text": "校事历",
+        "iconPath": "images/xsl_811.png",
+        "selectedIconPath": "images/xsl_812.png"
+      }
+    ]
   }
 }

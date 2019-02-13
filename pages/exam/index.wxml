@@ -11,7 +11,7 @@
 <view class="footer{{ showDialog ? ' show' : '' }}">
   <view class="row">
     <view class="green2"><i-count-down countdown-class="cd" target="{{targetTime2}}" bindcallback="myLinsterner" clear-timer="{{clearTimer}}" class="title3"></i-count-down></view>
-    <view class="green2">交卷</view>
+    <view class="green2">交卷/重考</view>
     <view bindtap='anchor' class="green2">定位</view>
   </view>
     <scroll-view scroll-y="true" style="height:400rpx;margin-left:40rpx;">
