@@ -1,2 +1,6 @@
-<!--pages/index/index.wxml-->
-<text>pages/index/index.wxml</text>
+
+<block  wx:for="{{list}}" wx:for-index="idx" wx:for-item="idata" wx:key="{{idata[0]}}">
+<view id="t{{idx+1}}">
+<c-question is_vip="{{is_vip}}" idata="{{idata}}" mode="{{mode}}"></c-question>
+</view>
+</block>
