@@ -1,0 +1,40 @@
+<!--lower-threshold="50" bindscrolltolower="loadmore"-->
+<scroll-view class="aa" scroll-y="true"  scroll-into-view="{{toview}}">
+<block  wx:for="{{list}}" wx:for-index="idx" wx:for-item="idata" wx:key="{{idata[0]}}">
+<view id="t{{idx+1}}">
+<c-question is_vip="{{is_vip}}" idata="{{idata}}" mode="{{mode}}"></c-question>
+</view>
+</block>
+</scroll-view>
+
+
+
+
+
+<view class="bb">
+  <view class="header2{{!showView?' tck-show':' tck-hide'}}">
+    <i-count-down target="{{targetTime2}}" bindcallback="myLinsterner" clear-timer="{{clearTimer}}" class="title3"></i-count-down>
+    <view class="btn2 green2">交卷</view><view bindtap='anchor'>锚点</view>
+  </view>
+</view>
+<view class="zz {{showView?'tck-show':'tck-hide'}}"bindtap="tabClickQxdown"data-hef='{{showView}}' >
+  <!-- 弹出框 -->
+  <view class="tck {{downAni?'down':'up'}}">
+    <view class="header3">
+      <i-count-down target="{{targetTime2}}" bindcallback="myLinsterner" clear-timer="{{clearTimer}}" class="title3"></i-count-down>
+      <text class="btn green">交卷</text><text bindtap='anchor'>锚点</text>
+    </view>
+
+    <scroll-view scroll-y="true" style="height:300rpx" >
+    <view class="option">
+    <block  wx:for="{{list}}" wx:for-index="idx" wx:for-item="idata" wx:key="{{idata[0]}}">
+    <text class="circle white">{{idx+1}}</text>
+    </block>
+    </view>
+    </scroll-view>
+  </view>
+</view>
+
+
+
+     

@@ -9,7 +9,9 @@ var course = ""
 var page = 0
 var list=[]
 Page({
+  
   data: {
+    showDialog:false,
     grids: [0, 1, 2, 3, 4, 5],
     showView: false,
     downAni: false,
@@ -69,9 +71,14 @@ Page({
 
 
   },
+  jump:function(e){
+    var tid = e.currentTarget.dataset.tid;
+    console.log("zzz", tid)
+    this.setData({toview:tid})
+  },
   anchor(){
     console.log("zzz")
-    this.setData({toview:"t20"})
+    this.setData({toview:"t20",showDialog:!this.data.showDialog})
 
     //展开隐藏菜单
     this.setData({

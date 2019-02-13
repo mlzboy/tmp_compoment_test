@@ -46,7 +46,7 @@ height: 60rpx;
 font-size: 42rpx;
 text-align: center;
 line-height: 60rpx;
-margin:0 0 40rpx 40rpx
+margin:20rpx 20rpx 20rpx 0;
 }
 .answer
 {
@@ -238,6 +238,8 @@ height:0;
 
 .option
 {
+margin:0;
+padding:0;
 justify-content:flex-start;
 display: flex;
 flex-direction:row;
@@ -364,7 +366,7 @@ height:0;
  {
    /*height:1000rpx;*/
    position: absolute;
-   bottom:200rpx;
+   bottom:70rpx;
    top:0;
    
  }
@@ -372,4 +374,42 @@ height:0;
     position: absolute;
     height: 200rpx;
     width: 100vw;
+}
+
+
+.footer
+{
+  margin: 0;
+  padding:0;
+  position: fixed;
+  bottom: -400rpx;
+  width: 750rpx;
+  background:white;
+  
+  transform: translateY(0%);
+  transition: all 0.4s ease;
+  
+  z-index:12;
+}
+
+.row
+{
+  height: 70rpx;
+  line-height: 70rpx;
+  font-size: 42rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding:0rpx 40rpx 0rpx 40rpx;
+  border-top-style: solid;
+  border-top-color: #00c355;
+  border-top-width: 1rpx;
+}
+
+.cd{
+  font-size: 42rpx;
+}
+
+.show{
+    bottom:0rpx;
 }
