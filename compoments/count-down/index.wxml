@@ -1,1 +1,9 @@
-<text class="countdown-class">{{time}}</text>
+<view class="row1">
+<view class="bl" style="border-top-left-radius: 8rpx;border-bottom-left-radius: 8rpx;">{{time}}</view>
+<view class="br" style="border-top-right-radius: 8rpx;border-bottom-right-radius: 8rpx;">交卷</view>
+</view>
+<!--
+<view class="row1">
+<view class="br" style="border-top-left-radius: 8rpx;border-bottom-left-radius: 8rpx;border-top-right-radius: 8rpx;border-bottom-right-radius: 8rpx;">重考</view>
+</view>
+-->

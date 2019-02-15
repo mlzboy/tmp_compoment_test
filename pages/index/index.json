@@ -1,3 +1,7 @@
 {
-  "usingComponents": {}
+  "navigationBarTitleText": "单选题",
+  "usingComponents": {
+    "c-question": "/compoments/question/question",
+    "i-count-down": "/compoments/count-down/index"
+  }
 }

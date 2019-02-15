@@ -1,0 +1,27 @@
+.row1
+{
+  font-size: 30rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+
+}
+
+.bl{
+border-top-color:#00c355;border-top-style:solid;border-top-width:1rpx;
+border-left-color:#00c355;border-left-style:solid;border-left-width:1rpx;
+border-bottom-color:#00c355;border-bottom-style:solid;border-bottom-width:1rpx;
+width:90rpx;
+text-align:center;
+}
+
+.br{
+  border-color: #00c355;
+  border-style: solid;
+  border-width: 1rpx;
+  width: 80rpx;
+  text-align: center
+}

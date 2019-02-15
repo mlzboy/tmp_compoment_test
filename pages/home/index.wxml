@@ -317,7 +317,7 @@
     <view class="memory_title">专项练习</view>
   </view> 
   <view class="sv2">
-  <navigator url="/pages/exam/index?course=大学心理学&exam_no=0" open-type="navigate" hover-class="none">
+  <navigator url="/pages/index/index?course=大学心理学&exam_no=0" open-type="navigate" hover-class="none">
     <view class="block_test">
     <view class="icon_test {{cls}}">单</view>
     <view class="text_test">单选题</view>

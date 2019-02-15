@@ -1,3 +1,15 @@
-<!--pages/layout/index.wxml-->
-<scroll-view class="a">bbbbb</scroll-view> 
-<view class="b">2222</view>
+<view class="row">
+<view></view>
+<view class="row1">
+<view class="bl select" style="border-top-left-radius: 8rpx;border-bottom-left-radius: 8rpx;">练习模式</view>
+<view class="bl ">记忆模式</view>
+<view class="br " style="border-top-right-radius: 8rpx;border-bottom-right-radius: 8rpx;">VIP记忆模式</view>
+</view>
+<view class="row2">
+<view class="rect"></view>
+<view class="rect"></view>
+<view class="rect"></view>
+<view class="rect"></view>
+<view class="jump">10/100</view>
+</view>
+</view>

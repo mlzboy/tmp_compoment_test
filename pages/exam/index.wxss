@@ -85,6 +85,7 @@ border-color:#00c355;
 }
 .green2{
   color:#00c355;
+  font-size: 30rpx;
 }
 .green {
 	color: white;
@@ -128,6 +129,7 @@ font-family:"Lucida Sans Unicode", "Lucida Grande", "sans-serif","Tahoma", "Gene
   display: flex;
   justify-content: center;
 }
+/*
 .br
 {
   background-color:#d3d3d3;
@@ -135,6 +137,7 @@ font-family:"Lucida Sans Unicode", "Lucida Grande", "sans-serif","Tahoma", "Gene
   line-height: 20rpx;
   width: 100%;
 }
+*/
 .line
 {
   background-color:#d3d3d3;
@@ -366,8 +369,8 @@ height:0;
  {
    /*height:1000rpx;*/
    position: absolute;
-   bottom:70rpx;
-   top:0;
+   bottom:0rpx;
+   top:72rpx;
    
  }
  .bb{
@@ -409,7 +412,129 @@ height:0;
 .cd{
   font-size: 42rpx;
 }
-
+/*
 .show{
     bottom:0rpx;
+}
+*/
+
+
+
+.footerx
+{
+  margin: 0;
+  padding:0;
+  //position: fixed;
+  top: -600rpx;
+  width: 100%;
+  background:blue;
+  
+  transform: translateY(0%);
+  transition: all 0.4s ease;
+  
+  z-index:12;
+}
+
+.rowx
+{
+  height: 70rpx;
+  line-height: 70rpx;
+  font-size: 42rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding:0rpx 40rpx 0rpx 40rpx;
+  border-bottom-style: solid;
+  border-bottom-color: lightgray;
+  border-bottom-width: 1rpx;
+  position: fixed;
+  top:0;
+  left:0;
+  right:0;
+  z-index: 100;
+  background: white;
+}
+
+.cd{
+  font-size: 42rpx;
+}
+
+.show{
+    top:100rpx;
+}
+
+
+.row1
+{
+  font-size: 30rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+
+}
+
+.select{
+  background: #00c355;
+  color: white;
+  font-size: 30rpx;
+  text-align: center;
+}
+
+.bl{
+border-top-color:#00c355;border-top-style:solid;border-top-width:1rpx;
+border-left-color:#00c355;border-left-style:solid;border-left-width:1rpx;
+border-bottom-color:#00c355;border-bottom-style:solid;border-bottom-width:1rpx;
+width:90rpx;
+text-align:center;
+}
+
+.br{
+  border-color: #00c355;
+  border-style: solid;
+  border-width: 1rpx;
+  width: 140rpx;
+  text-align: center
+}
+
+
+.cd{
+  font-size: 30rpx;
+}
+
+.show{
+      top:72rpx;
+
+}
+
+.rect
+{
+  width: 12rpx;
+  height: 12rpx;
+  margin-top: 1rpx;
+  margin-left: 1rpx;
+  border-radius: 4rpx;
+  border-width: 1rpx;
+  border-color:#00c355;
+  border-style: solid;
+}
+.row2
+{
+  margin:0 0 0 20rpx;
+  padding:0;
+  font-size: 30rpx;
+  width:40rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+.jump
+{
+  height: 28rpx;
+  line-height: 28rpx;
+  font-size: 18rpx;
 }

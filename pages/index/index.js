@@ -13,8 +13,7 @@ Page({
   data: {
     showDialog: false,
     grids: [0, 1, 2, 3, 4, 5],
-    showView: false,
-    downAni: false,
+
 
     current_page: 0,
     mode: 'exam',
@@ -39,6 +38,10 @@ Page({
     ],
     is_vip: false
   },
+  p:function(){
+    console.log("zzz")
+    this.setData({toview:"t20"})
+  },
   //事件处理函数
   bindViewTap: function () {
     wx.navigateTo({
@@ -55,6 +58,25 @@ Page({
     wx.setNavigationBarTitle({
       title: params.course + params.exam_no
     })
+
+    var that = this;
+    // 获取系统信息
+    wx.getSystemInfo({
+      success: function (res) {
+        // console.log(res);
+        // 可使用窗口宽度、高度
+        console.log('height=' + res.windowHeight);
+        console.log('width=' + res.windowWidth);
+        let _h = res.windowHeight - res.windowWidth / 750 * 73
+        console.log("second_height", _h)
+        // 计算主体部分高度,单位为px
+        that.setData({
+          // second部分高度 = 利用窗口可使用高度 - first部分高度（这里的高度单位为px，所有利用比例将300rpx转换为px）
+          h: _h
+        })
+      }
+    })
+
     page += 1
     list = []
     for (let i = 0; i < current_exam_idx.length; ++i) {
@@ -74,17 +96,13 @@ Page({
   jump: function (e) {
     var tid = e.currentTarget.dataset.tid;
     console.log("zzz", tid)
-    this.setData({ toview: tid })
+    this.setData({ toview: tid,showDialog:!this.data.showDialog })
   },
-  anchor() {
+  anchor:function(){
     console.log("zzz")
     this.setData({ toview: "t20", showDialog: !this.data.showDialog })
 
-    //展开隐藏菜单
-    this.setData({
-      showView: true,
-      downAni: false
-    });
+
   },
   myLinsterner(e) {
     console.log("icountdown finished")

@@ -3,8 +3,8 @@
     "pages/xsl/index",
     "pages/exam/index",
     "pages/home/index",
-    "pages/logs/logs",
-    "pages/layout/index"
+    "pages/layout/index",
+    "pages/index/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

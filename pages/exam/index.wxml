@@ -1,3 +1,28 @@
+<view class="rowx">
+  <i-count-down  target="{{targetTime2}}" bindcallback="myLinsterner" clear-timer="{{clearTimer}}" ></i-count-down>
+  <view class="row1">
+    <view class="bl select" style="border-top-left-radius: 8rpx;border-bottom-left-radius: 8rpx;" bindtap="p">考试</view>
+    <view class="bl ">记忆</view>
+    <view class="br " style="border-top-right-radius: 8rpx;border-bottom-right-radius: 8rpx;">高级记记</view>
+  </view>
+  <view class="row2" bindtap='anchor'>
+    <view class="rect"></view>
+    <view class="rect"></view>
+    <view class="rect"></view>
+    <view class="rect"></view>
+    <view class="jump">10/100</view>
+  </view>
+</view>
+<view class="footerx {{ showDialog ? ' show' : '' }}" style="">
+  <scroll-view scroll-y="true"  style="height:600rpx;margin:10rpx 80rpx 0 40rpx">
+    <view class="option">
+      <block  wx:for="{{list}}" wx:for-index="idx" wx:for-item="idata" wx:key="{{idata[0]}}">
+        <text class="circle white" data-tid="t{{idx+1}}" bindtap="jump">{{idx+1}}</text>
+      </block>
+    </view>
+  </scroll-view>
+</view>
+
 <!--lower-threshold="50" bindscrolltolower="loadmore"-->
 <scroll-view class="aa" scroll-y="true"  scroll-into-view="{{toview}}">
 <block  wx:for="{{list}}" wx:for-index="idx" wx:for-item="idata" wx:key="{{idata[0]}}">
@@ -7,7 +32,7 @@
 </block>
 </scroll-view>
 
-
+<!--
 <view class="footer{{ showDialog ? ' show' : '' }}">
   <view class="row">
     <view class="green2"><i-count-down countdown-class="cd" target="{{targetTime2}}" bindcallback="myLinsterner" clear-timer="{{clearTimer}}" class="title3"></i-count-down></view>
@@ -22,7 +47,7 @@
       </view>
     </scroll-view>
 </view>
-
+-->
 
 
      
