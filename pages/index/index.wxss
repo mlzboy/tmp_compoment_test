@@ -249,7 +249,7 @@ swiper{
 border-top-color:#00c355;border-top-style:solid;border-top-width:1rpx;
 border-left-color:#00c355;border-left-style:solid;border-left-width:1rpx;
 border-bottom-color:#00c355;border-bottom-style:solid;border-bottom-width:1rpx;
-width:140rpx;
+width:90rpx;
 text-align:center;
 }
 
@@ -257,7 +257,7 @@ text-align:center;
   border-color: #00c355;
   border-style: solid;
   border-width: 1rpx;
-  width: 180rpx;
+  width: 150rpx;
   text-align: center
 }
 

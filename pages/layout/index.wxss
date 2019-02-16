@@ -45,7 +45,7 @@ page{margin:0;padding:0}
 border-top-color:#00c355;border-top-style:solid;border-top-width:1rpx;
 border-left-color:#00c355;border-left-style:solid;border-left-width:1rpx;
 border-bottom-color:#00c355;border-bottom-style:solid;border-bottom-width:1rpx;
-width:140rpx;
+width:90rpx;
 text-align:center;
 }
 
@@ -92,4 +92,35 @@ text-align:center;
   height: 28rpx;
   line-height: 28rpx;
   font-size: 18rpx;
+}
+
+.bloc{
+  width:45rpx;
+  height:45rpx;
+  border-width: 1rpx;
+  border-radius: 5rpx;
+  border-color:#00c355;
+  border-style: solid;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center
+}
+.line{
+  display: block;
+  width:80%;
+  margin:10rpx 5rpx 10rpx 5rpx;
+  background: #00c355;
+  height: 4rpx;
+  line-height: 4rpx;
+}
+.cicl{
+  display: block;
+  width: 8rpx;
+  height: 8rpx;
+  border-width: 1rpx;
+  border-style: solid;
+  border-radius: 23rpx;
+  border-color: #00c355;
+  background: #00c355;
 }
