@@ -41,11 +41,11 @@ position: relative;
 
 .circle {
 border-radius: 50%;
-width: 80rpx;
-height: 80rpx; 
+width: 60rpx;
+height: 60rpx; 
 font-size: 42rpx;
 text-align: center;
-line-height: 80rpx;
+line-height: 60rpx;
 margin:20rpx 20rpx 20rpx 0;
 }
 .answer

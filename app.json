@@ -3,9 +3,7 @@
     "pages/xsl/index",
     "pages/exam/index",
     "pages/home/index",
-    "pages/layout/index",
-    "pages/index/index"
-  ],
+    "pages/layout/index" ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",

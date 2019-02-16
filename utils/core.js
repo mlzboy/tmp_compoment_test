@@ -1,5 +1,39 @@
 var store = require("./store.js")
 
+/*
+映射1-20 => 卷一到二十
+*/
+function digital_number_to_chinese_number(digital_number,perfix)
+{
+  let dict={
+    0:"一",
+    1:"二",
+    2:"三",
+    3:"四",
+    4:"五",
+    5:"六",
+    6:"七",
+    7:"八",
+    8:"九",
+    9:"十",
+    10:"十一",
+    11:"十二",
+    12:"十三",
+    13:"十四",
+    14:"十五",
+    15:"十六",
+    16:"十七",
+    17:"十八",
+    18:"十九",
+    19:"二十",
+  }
+  
+  if (dict.hasOwnProperty(digital_number)){
+    return perfix+dict[digital_number]
+  }
+  return ""
+}
+
 function deepCopy(obj) {
   let _obj = JSON.stringify(obj),
     objClone = JSON.parse(_obj);
@@ -310,7 +344,8 @@ module.exports = {
   highlight_answers: hightlight_answers,
   add_answer_char:add_answers_char,
   data_state_change:data_state_change,
-  parctice_tap_confirm_or_exam_show_mode_or_exam_full_submit:parctice_tap_confirm_or_exam_show_mode_or_exam_full_submit
+  parctice_tap_confirm_or_exam_show_mode_or_exam_full_submit:parctice_tap_confirm_or_exam_show_mode_or_exam_full_submit,
+  digital_number_to_chinese_number:digital_number_to_chinese_number
 }
 
 function _gave_selected_options_gray_backgroud(answers, selected_idxs) {

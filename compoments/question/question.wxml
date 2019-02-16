@@ -37,7 +37,7 @@
   </block>
 </view>
 
-<block wx:if="{{data[9] || (mode == 'exam_show') || (mode == 'memory_normal') || (mode == 'memory_vip')}}">
+<block wx:if="{{(data[9]==true) || (mode == 'exam_show') || (mode == 'memory_normal') || (mode == 'memory_vip')}}">
   <view class="header2">
     <text class="title3"> 答案：</text>
     <text class="content3"> {{data[3]}}</text>

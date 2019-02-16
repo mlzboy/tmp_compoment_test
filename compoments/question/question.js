@@ -1,6 +1,3 @@
-var _ = require('../../utils/underscore.js');
-var db = require("../../utils/data.js");
-var utils = require("../../utils/util.js")
 var core = require("../../utils/core.js")
 var store = require("../../utils/store.js")
 
@@ -32,7 +29,7 @@ Component({
         "大学生品德评价指标体系一般包括（    ）。",
         "BC",
         "M",
-        "大学心理学",
+        "大学心理学",//数据中为空，按课程加载数据，此行不在需要
         "素质教育",
         /*
         "",//确定按钮颜色 

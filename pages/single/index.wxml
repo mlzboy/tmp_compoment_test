@@ -1,12 +1,7 @@
 <view class="rowx">
   <i-count-down  target="{{targetTime2}}" bindcallback="myLinsterner" clear-timer="{{clearTimer}}"  mode="{{mode}}" bind:submit_exam="submit_exam" bind:re_exam="re_exam"></i-count-down>
   <view class="row1">
-    <block wx:if="{{mode == 'practice'}}">
-        <view class="bl {{mode == 'practice' ? 'select' : ''}}" style="border-top-left-radius: 8rpx;border-bottom-left-radius: 8rpx;" data-info="exam_or_exam_show" bindtap='change_mode'>练习</view>
-    </block>
-    <block wx:else>
-      <view class="bl {{((mode == 'exam') || (mode =='exam_show'))? 'select' : ''}}" style="border-top-left-radius: 8rpx;border-bottom-left-radius: 8rpx;" data-info="exam_or_exam_show" bindtap='change_mode'>考试</view>
-    </block>
+    <view class="bl {{((mode == 'exam') || (mode =='exam_show'))? 'select' : ''}}" style="border-top-left-radius: 8rpx;border-bottom-left-radius: 8rpx;" data-info="exam_or_exam_show" bindtap='change_mode'>考试</view>
     <view class="bl {{(mode == 'memory_normal' ? 'select' : '')}}" data-info="memory_normal" bindtap='change_mode'>记忆</view>
     <view class="br {{mode == 'memory_vip' ? 'select' : ''}}" style="border-top-right-radius: 8rpx;border-bottom-right-radius: 8rpx;" data-info="memory_vip" bindtap="change_mode">高级记记</view>
   </view>

@@ -37,7 +37,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 3,
+			"current": 4,
 			"list": [
 				{
 					"id": 0,
@@ -64,6 +64,13 @@
 					"id": 3,
 					"name": "single",
 					"pathName": "pages/index/index",
+					"query": "course=大学心理学&exam_no=0",
+					"scene": null
+				},
+				{
+					"id": 4,
+					"name": "practice",
+					"pathName": "pages/practice/index",
 					"query": "course=大学心理学&exam_no=0",
 					"scene": null
 				}
