@@ -1,9 +1,11 @@
+<block wx:if="{{mode == 'exam'}}">
 <view class="row1">
 <view class="bl" style="border-top-left-radius: 8rpx;border-bottom-left-radius: 8rpx;">{{time}}</view>
-<view class="br" style="border-top-right-radius: 8rpx;border-bottom-right-radius: 8rpx;">交卷</view>
+<view class="br" style="border-top-right-radius: 8rpx;border-bottom-right-radius: 8rpx;" bindtap="submit_exam">交卷</view>
 </view>
-<!--
+</block>
+<block wx:if="{{mode == 'exam_show'}}">
 <view class="row1">
-<view class="br" style="border-top-left-radius: 8rpx;border-bottom-left-radius: 8rpx;border-top-right-radius: 8rpx;border-bottom-right-radius: 8rpx;">重考</view>
+<view class="br" style="border-top-left-radius: 8rpx;border-bottom-left-radius: 8rpx;border-top-right-radius: 8rpx;border-bottom-right-radius: 8rpx;" bindtap="re_exam">重考</view>
 </view>
--->
+</block>

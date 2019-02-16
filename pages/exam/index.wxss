@@ -424,10 +424,10 @@ height:0;
 {
   margin: 0;
   padding:0;
-  //position: fixed;
+  position: fixed;
   top: -600rpx;
   width: 100%;
-  background:blue;
+  background:white;
   
   transform: translateY(0%);
   transition: all 0.4s ease;
@@ -461,6 +461,16 @@ height:0;
 
 .show{
     top:100rpx;
+}
+.zan-dialog__mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.4);
+  display: none;
 }
 
 
@@ -506,9 +516,11 @@ text-align:center;
 
 .show{
       top:72rpx;
-
 }
 
+.show2{
+  display: block;
+}
 .rect
 {
   width: 12rpx;
@@ -538,3 +550,4 @@ text-align:center;
   line-height: 28rpx;
   font-size: 18rpx;
 }
+

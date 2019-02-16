@@ -16,7 +16,7 @@ Page({
 
 
     current_page: 0,
-    mode: 'exam',
+    mode: 'practice',
     idata: [
       9091,
       [
@@ -37,8 +37,8 @@ Page({
       */
     ],
     is_vip: false
-  },
-  p:function(){
+    },
+    p:function(){    
     console.log("zzz")
     this.setData({toview:"t20"})
   },

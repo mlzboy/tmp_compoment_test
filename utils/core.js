@@ -157,6 +157,7 @@ function parctice_tap_confirm_or_exam_show_mode_or_exam_full_submit(fulldata, mo
 
 
 function _gave_answer_and_remaker_wrong_answer(answers, right_answers, selected_idxs) {
+  console.log("_gave_answer_and_remaker_wrong_answer")
   for (let i = 0; i < answers.length; ++i) {
     if (right_answers.includes(answers[i][2])) {
       answers[i].push(" green2"); //正文颜色 
@@ -169,7 +170,10 @@ function _gave_answer_and_remaker_wrong_answer(answers, right_answers, selected_
     answers[i].push(""); //整行背景色
     //console.log(answers[i])
   }
+  console.log("TTT")
+  console.log("idxs",selected_idxs)
   for (let i of selected_idxs) {
+    console.log(i)
     if (right_answers.includes(answers[i][2])) {
       answers[i][2] = "√";
     }
@@ -182,6 +186,7 @@ function _gave_answer_and_remaker_wrong_answer(answers, right_answers, selected_
     answers[i][5] = " grayb";
     //}
   }
+  console.log("BBBB")
 }
 
 function data_state_change(fulldata, mode, selected_idxs) {

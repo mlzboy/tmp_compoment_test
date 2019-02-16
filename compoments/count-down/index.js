@@ -1,5 +1,9 @@
+var store = require("../../utils/store.js")
 Component({
     properties: {
+       // course:String,
+        mode:String,
+       // exam_no:Number,
         target: Number,
         showDay: Boolean,
         callback: String,
@@ -17,6 +21,16 @@ Component({
 
     },
     methods: {
+        submit_exam:function(){
+          var myEventDetail = {} // detail对象，提供给事件监听函数
+          var myEventOption = {} // 触发事件的选项
+          this.triggerEvent('submit_exam', myEventDetail, myEventOption)
+        },
+        re_exam:function(){
+          var myEventDetail = {} // detail对象，提供给事件监听函数
+          var myEventOption = {} // 触发事件的选项
+          this.triggerEvent('re_exam', myEventDetail, myEventOption)
+        },
         getFormat() {
             const data = this.data;
             const len = data.format.length;

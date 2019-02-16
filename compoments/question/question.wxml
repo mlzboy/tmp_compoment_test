@@ -2,6 +2,7 @@
 <wxs module="f" src="./common.wxs"></wxs>
 
 <scroll-view>
+{{data[0]}}
 <view class="header">
   <block wx:if="{{data[4]=='S'}}">
   <text class="category">选择</text>
@@ -36,14 +37,17 @@
   </block>
 </view>
 
-<block wx:if="{{data[9] == true}}">
-<view class="header2">
-  <text class="title3"> 答案：</text>
-  <text class="content3"> {{data[3]}}</text>
-</view>
-<view class="header2">
-  <text class="title3"> 技巧：</text>
-  <text class="content3"> <block wx:if="{{is_vip == true}}">技巧：技巧：技巧：技巧：技巧：技巧：技巧：技巧：技巧</block><block wx:else>你好aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</block></text>
-</view>
+<block wx:if="{{data[9] || (mode == 'exam_show') || (mode == 'memory_normal') || (mode == 'memory_vip')}}">
+  <view class="header2">
+    <text class="title3"> 答案：</text>
+    <text class="content3"> {{data[3]}}</text>
+  </view>
+  <view class="header2">
+    <text class="title3"> 技巧：</text>
+    <text class="content3">
+      <block wx:if="{{mode == 'memory_vip'}}">{{data[6]}}</block>
+      <block wx:else>开启vip</block>
+    </text>
+  </view>
 </block>
 </scroll-view>

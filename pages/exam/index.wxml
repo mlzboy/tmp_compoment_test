@@ -1,9 +1,9 @@
 <view class="rowx">
-  <i-count-down  target="{{targetTime2}}" bindcallback="myLinsterner" clear-timer="{{clearTimer}}" ></i-count-down>
+  <i-count-down  target="{{targetTime2}}" bindcallback="myLinsterner" clear-timer="{{clearTimer}}"  mode="{{mode}}" bind:submit_exam="submit_exam" bind:re_exam="re_exam"></i-count-down>
   <view class="row1">
-    <view class="bl select" style="border-top-left-radius: 8rpx;border-bottom-left-radius: 8rpx;" bindtap="p">考试</view>
-    <view class="bl ">记忆</view>
-    <view class="br " style="border-top-right-radius: 8rpx;border-bottom-right-radius: 8rpx;">高级记记</view>
+    <view class="bl {{((mode == 'exam') || (mode =='exam_show'))? 'select' : ''}}" style="border-top-left-radius: 8rpx;border-bottom-left-radius: 8rpx;" data-info="exam_or_exam_show" bindtap='change_mode'>考试</view>
+    <view class="bl {{(mode == 'memory_normal' ? 'select' : '')}}" data-info="memory_normal" bindtap='change_mode'>记忆</view>
+    <view class="br {{mode == 'memory_vip' ? 'select' : ''}}" style="border-top-right-radius: 8rpx;border-bottom-right-radius: 8rpx;" data-info="memory_vip" bindtap="change_mode">高级记记</view>
   </view>
   <view class="row2" bindtap='anchor'>
     <view class="rect"></view>
@@ -22,6 +22,7 @@
     </view>
   </scroll-view>
 </view>
+<view class="zan-dialog__mask {{ showDialog ? ' show2' : '' }}" bindtap="anchor" />
 
 <!--lower-threshold="50" bindscrolltolower="loadmore"-->
 <scroll-view class="aa" scroll-y="true"  scroll-into-view="{{toview}}">

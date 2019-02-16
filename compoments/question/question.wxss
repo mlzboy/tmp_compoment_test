@@ -221,7 +221,7 @@ width: 550rpx;
 }
 .title3
 {
-width:120rpx;
+width:140rpx;
 margin:0 0 10rpx 0;
 font-size: 42rpx;
 line-height: 60rpx;
