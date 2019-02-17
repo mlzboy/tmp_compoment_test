@@ -6,6 +6,7 @@
 </block>
 <block wx:if="{{mode == 'exam_show'}}">
 <view class="row1">
-<view class="br" style="border-top-left-radius: 8rpx;border-bottom-left-radius: 8rpx;border-top-right-radius: 8rpx;border-bottom-right-radius: 8rpx;" bindtap="re_exam">重考</view>
+<view class="bl {{score < 75 ? 'red' : ''}}" style="border-top-left-radius: 8rpx;border-bottom-left-radius: 8rpx;">{{score}}分</view>
+<view class="br" style="border-top-right-radius: 8rpx;border-bottom-right-radius: 8rpx;" bindtap="re_exam">重考</view>
 </view>
 </block>

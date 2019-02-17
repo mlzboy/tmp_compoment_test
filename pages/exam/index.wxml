@@ -1,5 +1,5 @@
 <view class="rowx">
-  <i-count-down  target="{{targetTime2}}" bindcallback="myLinsterner" clear-timer="{{clearTimer}}"  mode="{{mode}}" bind:submit_exam="submit_exam" bind:re_exam="re_exam"></i-count-down>
+  <i-count-down  target="{{targetTime2}}" score="{{score}}" bindcallback="myLinsterner" clear-timer="{{clearTimer}}"  mode="{{mode}}" bind:submit_exam="submit_exam" bind:re_exam="re_exam"></i-count-down>
   <view class="row1">
     <block wx:if="{{category.length > 0}}">
         <view class="bl {{mode == 'practice' ? 'select' : ''}}" style="border-top-left-radius: 8rpx;border-bottom-left-radius: 8rpx;" data-info="practice" bindtap='change_mode'>练习</view>
@@ -33,7 +33,7 @@
 <scroll-view class="aa" scroll-y="true"  scroll-into-view="{{toview}}">
 <block  wx:for="{{list}}" wx:for-index="idx" wx:for-item="idata" wx:key="{{idata[0]}}">
 <view id="t{{idx+1}}">
-<c-question is_vip="{{is_vip}}" idata="{{idata}}" mode="{{mode}}"></c-question>
+<c-question is_vip="{{is_vip}}" idata="{{idata}}" mode="{{mode}}" course="{{course}}" exam_no="{{exam_no}}"></c-question>
 </view>
 </block>
 </scroll-view>

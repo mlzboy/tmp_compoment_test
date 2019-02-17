@@ -8,6 +8,7 @@ const app = getApp()
 Page({
   
   data: {
+    score:0,
     showDialog:false,
     course:"大学心理学",
     exam_no:0,
@@ -94,7 +95,7 @@ Page({
     console.log(typeof params.course)
     console.log(typeof params.category)
     this.data.course = params.course
-    this.data.exam_no = (params.exam_no == undefined) ? -1 : params.exam_no//考试页时有此项
+    this.data.exam_no = (params.exam_no == undefined) ? -1 : parseInt(params.exam_no)//考试页时有此项
     this.data.category = (params.category == undefined) ? "" : params.category//专项练习有此项
     console.log("course",this.data.course)
     console.log("exam_no",this.data.exam_no)
@@ -131,18 +132,30 @@ Page({
         title += " 错题"
         break
       default://exam
-        current_x_idxs = DATA.exam_idxs[parseInt(this.data.exam_no)]
+        current_x_idxs = DATA.exam_idxs[this.data.exam_no]
         title += " " + core.digital_number_to_chinese_number(this.data.exam_no,"卷")
         this.data.mode = "exam"
         if (store.is_examed(this.data.course,this.data.exam_no)){
           this.data.mode = "exam_show"
         }
+
+        //count the score
+        let key1 = `${this.properties.course}_exam_${this.properties.exam_no}`
+        let user_selected_idxs = store._get(key1)
+        console.warn("TTTTTTTTTTTTTTTTTTTTTTTT")
+        this.data.score = core.count_the_score(user_selected_idxs,DATA.forward_idxs)
+        this.setData({score:this.data.score})
+        // store._hset(key1,key2,selected_idxs)
+        // key1 = `${this.properties.course}_${this.properties.mode}`
+        // key2 = this.properties.exam_no
+
         //from localstoage load selected panel data otherwise use mode status as selected panel
         panel = store.get_panel_from_localstoage(this.data.mode)
         console.log("data panel", panel)
         if (panel == "exam_or_exam_show") {
           if (store.is_examed(this.data.course, this.data.exam_no)) {
             this.data.mode = "exam_show"
+
           }
           else {
             this.data.mode = "exam"

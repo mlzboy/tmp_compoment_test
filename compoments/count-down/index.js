@@ -2,6 +2,7 @@ var store = require("../../utils/store.js")
 Component({
     properties: {
        // course:String,
+       score:Number,
         mode:String,
        // exam_no:Number,
         target: Number,
@@ -18,7 +19,7 @@ Component({
     },
     ready() {
         this.getFormat();
-
+        
     },
     methods: {
         submit_exam:function(){

@@ -120,7 +120,7 @@ function process_multiple_selected_logic(selected_idxs,current_idx){
   }
   else
   {
-    selected_idxs.push(idx)
+    selected_idxs.push(current_idx)
   }
   return selected_idxs
 }
@@ -145,7 +145,7 @@ function get_selected_idxs(key1,key2){
   if (_hhas_key(key1,key2)){
     return _hget(key1,key2)
   }
-  _hset(key1,key2,[])
+  //_hset(key1,key2,[])
   return []
 }
 
@@ -171,8 +171,7 @@ function _hset(key1,key2,key2_val){
   }
   else{
     let dict = {}
-    dict[key1]= {}
-    dict[key1][key2] = key2_val
+    dict[key2]= key2_val
     _set(key1,dict)
   }
 }
@@ -215,7 +214,6 @@ module.exports = {
   get_selected_idxs:get_selected_idxs,
   process_multiple_selected_logic:process_multiple_selected_logic,
   process_single_selected_logic:process_single_selected_logic,
-  _hset:_hset
 }
 /*
 console.log(set(1,1))

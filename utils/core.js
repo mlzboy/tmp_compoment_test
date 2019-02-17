@@ -1,6 +1,50 @@
 var store = require("./store.js")
 
 /*
+user_selected_idxs格式
+大学心理学_exam_0
+{
+  0：[1],
+  1:[],//未做题
+  2:[1,2]//多选题
+  ...
+  79//共80题
+}
+*/
+function count_the_score(user_selected_idxs,forward_idxs){
+  console.log("forward_idxs",forward_idxs)
+  var score = 0
+  for(let id in user_selected_idxs)
+  {
+    console.log("id",typeof id,id)
+    let user_answer_idxs = user_selected_idxs[id] // [1,2] or [1] or []
+    console.log("user_answer_idxs",user_answer_idxs)
+    let right_answer_idxs = []
+    let right_answers = forward_idxs[id][3]
+    let type = forward_idxs[id][4]
+    for (let char of right_answers){
+      right_answer_idxs.push(char.charCodeAt() - 65)
+    }
+    console.log("right_answer_idxs:",right_answer_idxs)
+    if (right_answer_idxs.sort().toString() == user_answer_idxs.sort().toString()){
+      console.log("type:",type)
+      if (type == "S"){
+        score += 1
+      }
+      if (type == "M"){
+        score += 2
+      }
+      if (type == "J"){
+        score += 1
+      }
+    }
+  }
+  console.log("score",score)
+  return score
+}
+
+
+/*
 映射1-20 => 卷一到二十
 */
 function digital_number_to_chinese_number(digital_number,perfix)
@@ -340,6 +384,7 @@ function data_state_change(fulldata, mode, selected_idxs) {
 }
 
 module.exports = {
+  count_the_score:count_the_score,
   highlight_answer: highlight_answer,
   highlight_answers: hightlight_answers,
   add_answer_char:add_answers_char,

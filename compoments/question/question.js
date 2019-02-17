@@ -168,6 +168,8 @@ Component({
           {
             key1 = `${this.properties.course}_${this.properties.mode}_${this.properties.exam_no}`
             key2 = this.properties.idata[0]
+            console.log("key1",key1)
+            console.log("key2",key2)
             let selected_idxs = store.get_selected_idxs(key1,key2)
             selected_idxs = store.process_single_selected_logic(selected_idxs,idx)
             store._hset(key1,key2,selected_idxs)
