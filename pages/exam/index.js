@@ -10,10 +10,9 @@ Page({
   
   data: {
     showDialog:false,
-    grids: [0, 1, 2, 3, 4, 5],
     course:"大学心理学",
     exam_no:0,
-    current_page:0,
+    category:undefined,
     list:[],
     mode: 'exam',
     idata: [
@@ -75,22 +74,20 @@ Page({
   },
   change_mode:function(e){
     console.log("change_mode")
-    
     var panel = e.currentTarget.dataset.info;
     console.log("info---------------------------------",panel)
-    if (panel == "exam_or_exam_show"){
-      store._set("panel", panel)
+    store._set("panel", panel)
+    if (this.data.category == undefined){
+      wx.redirectTo({
+        url: `/pages/exam/index?course=${this.data.course}&exam_no=${this.data.exam_no}`,
+      })      
     }
-    else if (panel == "memory_normal"){
-      store._set("panel", panel)
+    else{
+      wx.redirectTo({
+        url: `/pages/exam/index?course=${this.data.course}&category=${this.data.category}`,
+      }) 
     }
-    else{//memory_vip
-      store._set("panel", panel)
-      //TODO:fetch from server user is vip if yes return memory_vip status else naviage to vip loading page
-    }
-    wx.redirectTo({
-      url: `/pages/exam/index?course=${this.data.course}&exam_no=${this.data.exam_no}`,
-    })
+
   },
   onLoad: function (params) {
     console.log(typeof params.exam_no)
@@ -100,12 +97,14 @@ Page({
     this.data.category = params.category
     console.log("course",this.data.course)
     console.log("exam_no",this.data.exam_no)
-
+    console.log("category",this.data.category)
     //load require bussiness data
     let DATA = require("../../data/" + this.data.course + ".js")
     let current_x_idxs = []
     let title = this.data.course 
     this.data.mode = "practice"
+    let panel = store.get_panel_from_localstoage(this.data.mode)
+    this.data.mode = panel
     switch(this.data.category || this.data.exam_no){
       case "single":
         current_x_idxs = DATA.single_idxs
@@ -138,7 +137,7 @@ Page({
         }
         this.data.mode = "exam"
         //from localstoage load selected panel data otherwise use mode status as selected panel
-        let panel = store.get_panel_from_localstoage(this.data.mode)
+        panel = store.get_panel_from_localstoage(this.data.mode)
         console.log("data panel", panel)
         if (panel == "exam_or_exam_show") {
           if (store.is_examed(this.data.course, this.data.exam_no)) {
@@ -154,7 +153,7 @@ Page({
         console.log(panel)
         break;
     }
-
+    console.log(current_x_idxs)
     console.log("current_x_idx length:",current_x_idxs.length)
     console.log(current_x_idxs)
     
@@ -175,7 +174,8 @@ Page({
       targetTime2: new Date().getTime() + 30 * 60 * 1000,
       course:this.data.course,
       exam_no:this.data.exam_no,
-      mode:this.data.mode
+      mode:this.data.mode,
+      category:this.data.category
     })
  
 

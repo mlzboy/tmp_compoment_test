@@ -1,8 +1,8 @@
 <view class="rowx">
   <i-count-down  target="{{targetTime2}}" bindcallback="myLinsterner" clear-timer="{{clearTimer}}"  mode="{{mode}}" bind:submit_exam="submit_exam" bind:re_exam="re_exam"></i-count-down>
   <view class="row1">
-    <block wx:if="{{mode == 'practice'}}">
-        <view class="bl {{mode == 'practice' ? 'select' : ''}}" style="border-top-left-radius: 8rpx;border-bottom-left-radius: 8rpx;" data-info="exam_or_exam_show" bindtap='change_mode'>练习</view>
+    <block wx:if="{{category != undefined}}">
+        <view class="bl {{mode == 'practice' ? 'select' : ''}}" style="border-top-left-radius: 8rpx;border-bottom-left-radius: 8rpx;" data-info="practice" bindtap='change_mode'>练习</view>
     </block>
     <block wx:else>
       <view class="bl {{((mode == 'exam') || (mode =='exam_show'))? 'select' : ''}}" style="border-top-left-radius: 8rpx;border-bottom-left-radius: 8rpx;" data-info="exam_or_exam_show" bindtap='change_mode'>考试</view>
