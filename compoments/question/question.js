@@ -1,15 +1,14 @@
 var core = require("../../utils/core.js")
 var store = require("../../utils/store.js")
 
-var r;
-var id = 2;
+
+
 // compoments/question/question.js
 Component({
   /**
    * 组件的属性列表
    */
   properties: {
-    //is_show_answer:{type:Boolean,value:false},
     is_vip: { type: Boolean, value: true },
     course: { type: String, value: "大学心理学" },
     exam_no: { type: Number, value: 0 },
@@ -50,45 +49,47 @@ Component({
   ready: function () {
 
     var that = this
-    this.data.a = 3
     if (this.properties.mode == "practice") {
-      console.log("---------------------------------------")
-      let selected_idx = store.sget(this.properties.mode, this.properties.idata[0])
-      console.log("-----------------",selected_idx)
-      let is_show_answer = this.properties.is_show_answer
-      let is_practiced = store.is_practiced(this.properties.idata[0])//practiced
+      // console.log("---------------------------------------")
+      let key1 = `${this.properties.course}_${this.properties.mode}`
+      let key2 = this.properties.idata[0]
+      let selected_idxs = store.get_selected_idxs(key1, key2)
+      // console.log("-----------------",selected_idxs)
+      let is_practiced = store.is_practiced(this.data.course,this.properties.idata[0])//practiced
       var r = []
       if (is_practiced) {
         console.log("AEAAAA", r)
-        r = core.parctice_tap_confirm_or_exam_show_mode_or_exam_full_submit(this.properties.idata, this.properties.mode, selected_idx)
+        r = core.parctice_tap_confirm_or_exam_show_mode_or_exam_full_submit(this.properties.course,this.properties.idata, this.properties.mode, selected_idxs)
         r[9] = true
         //console.log("is_practiced")
       }
       else {
-        r = core.data_state_change(this.properties.idata, this.properties.mode, selected_idx)
+        r = core.data_state_change(this.properties.idata, this.properties.mode, selected_idxs)
         r[9] = false
       }
       that.setData({ data: r })
     }
     else if (this.properties.mode == "exam") {
-      let selected_idxs = store.sget2(this.properties.mode,this.properties.course,this.properties.exam_no, this.properties.idata[0])
-      let is_show_answer = this.properties.is_show_answer
-
+      let key1 = `${this.properties.course}_${this.properties.mode}_${this.properties.exam_no}`
+      let key2 = this.properties.idata[0]
+      let selected_idxs = store.get_selected_idxs(key1,key2)
       let r = core.data_state_change(this.properties.idata, this.properties.mode, selected_idxs)
       r[9] = false//not examed
       //console.log(r)
       that.setData({ data: r })
     }
     else if (this.properties.mode == "exam_show") {
-      let selected_idxs = store.sget2("exam",this.properties.course,this.properties.exam_no, this.properties.idata[0])
+      let key1 = `${this.properties.course}_exam_${this.properties.exam_no}`
+      let key2 = this.properties.idata[0]     
+      let selected_idxs = store.get_selected_idxs(key1,key2)
       //console.log("exam_show",selected_idx)
-      let r = core.parctice_tap_confirm_or_exam_show_mode_or_exam_full_submit(this.properties.idata, this.properties.mode, selected_idxs)
-      //r[9] = true //examed
+      let r = core.parctice_tap_confirm_or_exam_show_mode_or_exam_full_submit(this.properties.course,this.properties.idata, this.properties.mode, selected_idxs)
+      //r[9] = true //examed =>该句代码省力量是因为上一条函数中包含该行代码
       //exam模式整体提交的时候，执行add_examed每道题
       //console.log(r)
       that.setData({ data: r })
     }
-    else {
+    else {//memory_normal or memory_vip
       let r = core.data_state_change(this.properties.idata, this.properties.mode, [])
       that.setData({ data: r })
     }
@@ -104,12 +105,14 @@ Component({
       if (((mode == "practice") && (_fulldata[4] == "M")) || (mode == "exam_show"))//出结果
       {
       */
-      let selected_idxs = store.sget2(this.properties.mode,this.properties.course,this.properties.exam_no, this.properties.idata[0])
-      let r = core.parctice_tap_confirm_or_exam_show_mode_or_exam_full_submit(this.properties.idata, this.properties.mode, selected_idxs)
-      if (this.properties.mode == "practice") {
-        store.add_practiced(this.properties.idata[0])
-        r[9] = true //practiced
-      }
+      let key1 = `${this.properties.course}_${this.properties.mode}_${this.properties.exam_no}`
+      let key2 = this.properties.idata[0]
+      let selected_idxs = store.get_selected_idxs(key1,key2)
+      let r = core.parctice_tap_confirm_or_exam_show_mode_or_exam_full_submit(this.properties.course,this.properties.idata, this.properties.mode, selected_idxs)
+      // if (this.properties.mode == "practice") {
+      //   store.add_practiced(this.properties.idata[0])
+      //   r[9] = true //practiced
+      // }
       that.setData({ data: r })
 
       //console.log("tap_confirm:",r)
@@ -120,75 +123,55 @@ Component({
 
 
     tap_select: function (e) {
-      console.log("EEEEEEEEEEEEE")
-      if (this.properties.mode == "memory_normal" || this.properties.mode == "memory_vip" || this.properties.mode == "exam_show" || (store.is_practiced(this.properties.idata[0]) == true && this.properties.mode == "practice")) {
+      let key1,key2,r
+      if (this.properties.mode == "memory_normal" || this.properties.mode == "memory_vip" || this.properties.mode == "exam_show" || (store.is_practiced(this.properties.course,this.properties.idata[0]) == true && this.properties.mode == "practice")) {
         return
       }
       var that = this;
       var idx = e.currentTarget.dataset.idx;
-      console.log("EEEEEEEEEEEEE")
 
       //practice or exam mode 选中变灰色，已选中的变不选中
       if (this.properties.idata[4] == 'M')//多选
       {
         if (this.properties.mode == "practice")
         {
-          //console.log("tttttttttttt")
-          store.mset(this.properties.mode, this.properties.idata[0], idx)
-          let selected_idx = store.sget(this.properties.mode, this.properties.idata[0])
-          //console.log(selected_idx)
-          let r = core.data_state_change(this.properties.idata, this.properties.mode, selected_idx)
-          r[9] = false//exam
-          //console.log("==================>>>")
-          //console.log(r)
-          that.setData({ data: r })
-          //console.log("ttttttttttttttttt")
-          return          
+          key1 = `${this.properties.course}_${this.properties.mode}`
+          key2 = this.properties.idata[0]      
         }
         else//exam mode
         {
-          console.log("tttttttttttt")
-          store.mset2(this.properties.mode,this.properties.course,this.properties.exam_no, this.properties.idata[0], idx)
-          let selected_idxs = store.mget2(this.properties.mode,this.properties.course,this.properties.exam_no,this.properties.idata[0])
-          //console.log(selected_idx)
-          let r = core.data_state_change(this.properties.idata, this.properties.mode, selected_idxs)
-          r[9] = false//exam
-          //console.log("==================>>>")
-          //console.log(r)
-          that.setData({ data: r })
-          //console.log("ttttttttttttttttt")
-          return      
+          key1 = `${this.properties.course}_${this.properties.mode}_${this.properties.exam_no}`
+          key2 = this.properties.idata[0]
         }
-
+        let selected_idxs = store.get_selected_idxs(key1,key2)
+        selected_idxs = store.process_multiple_selected_logic(selected_idxs,idx)
+        store._hset(key1,key2,selected_idxs)
+        r = core.data_state_change(this.properties.idata, this.properties.mode, selected_idxs)
+        r[9] = false//exam
+        that.setData({ data: r })
+        return      
       }
-
       else {//mode=practice单选，直接给结果,标记为practiced//mode=exam,单选，只能选中一个，选中其中一个，原先选中的取消
         {
-          console.log("EEEEEEEEEEEEE")
-          let r
           if (this.data.mode == "practice") {
-            console.log("EEEEEEEEEEEEE")
-            store.sset(this.properties.mode, this.properties.idata[0], idx)
-            let selected_idxs = store.sget(this.properties.mode, this.properties.idata[0])
-            //console.log("zzz",selected_idx)
+            key1 = `${this.properties.course}_${this.properties.mode}`
+            key2 = this.properties.idata[0]
+            let selected_idxs = store.get_selected_idxs(key1,key2)
+            selected_idxs = store.process_single_selected_logic(selected_idxs,idx)
+            store._hset(key1,key2,selected_idxs)
             r = core.data_state_change(this.properties.idata, this.properties.mode, selected_idxs)//虽是单选，但使用同样的list结构
-            store.add_practiced(r[0])
+            store.add_practiced(this.properties.course,r[0])
             r[9] = true//practiced
 
           }
           else//mode=exam
           {
-            console.log("EEEEEEEEEEEEE")
-
-            store.sset2(this.properties.mode,this.properties.course,this.properties.exam_no, this.properties.idata[0], idx)
-            console.log("EEEEEEEEEEEEE")
-            let selected_idxs = store.sget2(this.properties.mode,this.properties.course,this.properties.exam_no, this.properties.idata[0])//虽是单选，但使用同样的list结构
-            console.log("zzz",selected_idxs)
-            console.log("EEEEEEEEEEEEE")
-            
+            key1 = `${this.properties.course}_${this.properties.mode}_${this.properties.exam_no}`
+            key2 = this.properties.idata[0]
+            let selected_idxs = store.get_selected_idxs(key1,key2)
+            selected_idxs = store.process_single_selected_logic(selected_idxs,idx)
+            store._hset(key1,key2,selected_idxs)
             r = core.data_state_change(this.properties.idata, this.properties.mode, selected_idxs)
-            console.log("EEEEEEEEEEEEE")
-
             r[9] = false
           }
           console.log(r)
@@ -197,20 +180,6 @@ Component({
 
 
       }
-    },
-    transform(data, mode) {
-      //console.log(data)
-      //return data;
-      var answers = data[1]
-      if (mode == "highlight") {
-        //console.log("------------------")
-        let _answers = core.highlight_answers(answers)
-        data[1] = core.add_answer_char(_answers)
-        //console.log(data);      
-        return data;
-      }
-      data[1] = core.add_answer_char(answers)
-      return data;
     }
   }
 })

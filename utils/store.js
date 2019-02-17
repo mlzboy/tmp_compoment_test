@@ -1,14 +1,14 @@
-var is_practiced = id => _is_Xed("practiced",id)
-var add_practiced = id => _add_Xed("practiced",id)
+var is_practiced = (course,id) => _is_Xed(course + "_practiced",id)
+var add_practiced = (course,id) => _add_Xed(course + "_practiced",id)
 //var is_examed = id => _is_Xed("examed",id)
 //var add_examed = id => _add_Xed("examed",id)
 
 function is_examed(course,exam_no){
   let ret = []
-  if (_has_key("examed")){
-    ret = _get("examed")
+  if (_has_key(course + "_examed")){
+    ret = _get(course + "_examed")
   }
-  if (ret.includes(course+"_"+exam_no)){
+  if (ret.includes(exam_no)){
     return true;
   }
   return false;
@@ -16,15 +16,15 @@ function is_examed(course,exam_no){
 
 function add_examed(course,exam_no)
 {
-  let key = course+"_"+exam_no
+  let key = exam_no
   let ret = []
-  if (_has_key("examed")){
-    ret = _get("examed") 
+  if (_has_key(course + "_examed")){
+    ret = _get(course + "_examed") 
   }
   if (ret.includes(key) == false)
   {
     ret.push(key)
-    _set("examed", ret)
+    _set(course + "_examed",ret)
     return 1;
   }
   return 0;
@@ -36,17 +36,17 @@ function add_examed(course,exam_no)
 function re_exam(course,exam_no)
 {
   let ret = []
-  if (_has_key("examed")) {
-    ret = _get("examed")
-    let idx = ret.indexOf(course+"_"+exam_no)
+  if (_has_key(course + "_examed")) {
+    ret = _get(course + "_examed")
+    let idx = ret.indexOf(exam_no)
     if (idx > -1) {
       //删除list中存在的idx
       ret.splice(idx, 1)
-      _set("examed", ret)
+      _set(course + "_examed", ret)
     }
   }
 
-  let key = "exam" + "_" + course + "_" + exam_no
+  let key = `${course}_exam_${exam_no}`
   console.log(key)
   if (_has_key(key)){
     _del_key(key)
@@ -91,115 +91,39 @@ function _add_Xed(key,id)
   return true
 }
 
-function sget2(mode,course,exam_no,id){
-  let key = mode + "_" + course + "_" + exam_no
-  let dict = {}
-  if (_has_key(key)){
-    dict = _get(key)
-    console.log("uuuuuuuuuuu",dict)
-    if (dict.hasOwnProperty(id)){
-      console.log("dict[id]=",dict[id])
-      return dict[id]
-    }
-  }
-  return []
-}
-function sset2(mode,course,exam_no,id,idx){
-  let key = mode + "_" + course + "_" + exam_no
-  let dict = {}
-  if (_has_key(key)){
-    dict = _get(key)
-  }
-  dict[id] = [idx] //考虑了和多选一样的list结构
-  _set(key,dict)
-}
 
 /*
-存在，则删除，
-不存在则添加，同时加原先的所有去除
-针对单选
+selected_idxs,此前选中的数据，一般为[],[0],[1],[2],[3]
+返回的结果为[current_idx]或是[],为空是因为原selected_idxs中即包含该值
 */
-function sset(key_prefix,id,idx)
-{
-  //判断localstorage是否有id的key,有的话取其值
-  if (_has_key(key_prefix+id))
+function process_single_selected_logic(selected_idxs,current_idx){
+  let ret = selected_idxs.indexOf(current_idx)
+  if (ret > -1)
   {
-    let list = _get(key_prefix+id)
-    let ret = list.indexOf(idx)
-    if (ret > -1)
-    {
-      let list = []
-      _set(key_prefix+id, list)
-      return list
-    }
+    return []
   }
-  let list = [idx]
-  _set(key_prefix+id, list)
-  return list
-}
-
-function mset2(mode,course,exam_no,id,idx)
-{
-  let key = mode + "_" + course + "_" + exam_no
-  let dict = {}
-  if (_has_key(key)){
-    dict = _get(key)
-  }
-  let list = []
-  if (dict.hasOwnProperty(id)){
-    list = dict[id]
-    let ret = list.indexOf(idx)
-    if (ret > -1)
-    {
-      //删除list中存在的idx
-      list.splice(ret,1)
-    }
-    else
-    {
-      list.push(idx)
-    }
-  }
-  else{
-    list.push(idx)
-  }
-  dict[id] = list
-  _set(key,dict)
-  return list
+  return [current_idx]
 
 }
-
 /*
-反向操作，存在则删除，不存在则添加
-针对多选，建议改名为mset
+selected_idxs,此前选中的数据，一般为[0,1,2,3],[0,1,2,3,4],[],[0,1]...
+返回的结果为：如果current_idx此前在selected_idxs中，则删除该项返回，
+             如果没有则加入些项返回
+selected_idx + or - current_idx
 */
-function mset(key_prefix,id,idx)
-{
-  var list = [];
-  //判断localstorage是否有id的key,有的话取其值
-  if (_has_key(key_prefix+id))
+function process_multiple_selected_logic(selected_idxs,current_idx){
+  let ret = selected_idxs.indexOf(current_idx)
+  if (ret > -1)
   {
-    list = _get(key_prefix+id)
-    let ret = list.indexOf(idx)
-    if (ret > -1)
-    {
-      //删除list中存在的idx
-      list.splice(ret,1)
-    }
-    else
-    {
-      list.push(idx)
-    }
+    //删除list中存在的idx
+    selected_idxs.splice(ret,1)
   }
   else
   {
-    list.push(idx)
+    selected_idxs.push(idx)
   }
-  _set(key_prefix+id, list)
-  return list
+  return selected_idxs
 }
-
-
-
 
 function _set(key,value)
 {
@@ -207,14 +131,50 @@ function _set(key,value)
   //dict[key]= value
 }
 
-
-
 /*
-以后改为get
+example1:
+let key1 = `${this.properties.course}_${this.properties.mode}`
+let key2 = this.properties.idata[0]
+example2:
+let key1 = `${this.properties.course}_${this.properties.mode}_${this.properties.exam_no}`
+let key2 = this.properties.idata[0]
+id为正排索引id
 */
-function sget(key,id)
-{
-  return _get(key+id)
+function get_selected_idxs(key1,key2){
+  let dict = {}
+  if (_hhas_key(key1,key2)){
+    return _hget(key1,key2)
+  }
+  _hset(key1,key2,[])
+  return []
+}
+
+function _hhas_key(key1,key2){
+  if (_has_key(key1)){
+    let dict = _get(key1)
+    if (dict.hasOwnProperty(key2)){
+      return true
+    }
+  }
+  return false
+}
+
+function _hget(key1,key2){
+  return _get(key1)[key2]
+}
+
+function _hset(key1,key2,key2_val){
+  if (_has_key(key1)){
+    let dict = _get(key1)
+    dict[key2] = key2_val
+    _set(key1,dict)
+  }
+  else{
+    let dict = {}
+    dict[key1]= {}
+    dict[key1][key2] = key2_val
+    _set(key1,dict)
+  }
 }
 
 function _get(key)
@@ -225,7 +185,6 @@ function _get(key)
 
 function _has_key(key)
 {
-
   var r = wx.getStorageSync(key.toString());
   return r == '' ? false : true
   //return dict.hasOwnProperty(key)==true ? true:false
@@ -246,20 +205,17 @@ function _get_panel_from_localstorage(init_panel){
 module.exports = {
   get_panel_from_localstoage:_get_panel_from_localstorage,
   _set:_set,
-  sset2:sset2,
-  sset:sset,
-  mset2:mset2,
-  mset:mset,
-  sget: sget,//以后改为get
-  get:_get,
+  _get:_get,
+  _hset:_hset,
   is_practiced:is_practiced,
   add_practiced:add_practiced,
   is_examed:is_examed,
   add_examed:add_examed,
   re_exam:re_exam,
-  sget2:sget2,
-  mget2:sget2
-
+  get_selected_idxs:get_selected_idxs,
+  process_multiple_selected_logic:process_multiple_selected_logic,
+  process_single_selected_logic:process_single_selected_logic,
+  _hset:_hset
 }
 /*
 console.log(set(1,1))

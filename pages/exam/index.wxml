@@ -1,7 +1,7 @@
 <view class="rowx">
   <i-count-down  target="{{targetTime2}}" bindcallback="myLinsterner" clear-timer="{{clearTimer}}"  mode="{{mode}}" bind:submit_exam="submit_exam" bind:re_exam="re_exam"></i-count-down>
   <view class="row1">
-    <block wx:if="{{category != undefined}}">
+    <block wx:if="{{category.length > 0}}">
         <view class="bl {{mode == 'practice' ? 'select' : ''}}" style="border-top-left-radius: 8rpx;border-bottom-left-radius: 8rpx;" data-info="practice" bindtap='change_mode'>练习</view>
     </block>
     <block wx:else>

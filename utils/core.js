@@ -168,16 +168,16 @@ fulldata为初始完成一道题的数据，fulldata[1]中每一个answer最初�
 当用记有点击等行为是，调用此函数，将返回值使用this.setData({})进行更新即可
 */
 
-function parctice_tap_confirm_or_exam_show_mode_or_exam_full_submit(fulldata, mode, selected_idxs)
+function parctice_tap_confirm_or_exam_show_mode_or_exam_full_submit(course,fulldata, mode, selected_idxs)
 {
   let { _fulldata, answers, right_answers } = _prepare_data(fulldata, selected_idxs, mode);//只有通过practiceu状态确定按钮提交,或是exam状态整体提交才变为true,表示该题已做
   /*
   if (((mode == "practice") && (_fulldata[4] == "M")) || (mode == "exam_show"))//立马出结果
   {
   */
-    if (mode == "practiced")
+    if (mode == "practice")
     {
-      store.add_practiced(_fulldata[0])
+      store.add_practiced(course,_fulldata[0])
       _fulldata[9] = true;//practiced
     }
     //console.log("zzzzzzzzzzzzzzzzzzzzzz")
@@ -204,10 +204,10 @@ function _gave_answer_and_remaker_wrong_answer(answers, right_answers, selected_
     answers[i].push(""); //整行背景色
     //console.log(answers[i])
   }
-  console.log("TTT")
-  console.log("idxs",selected_idxs)
+  // console.log("TTT")
+  // console.log("idxs",selected_idxs)
   for (let i of selected_idxs) {
-    console.log(i)
+    // console.log(i)
     if (right_answers.includes(answers[i][2])) {
       answers[i][2] = "√";
     }
@@ -220,7 +220,7 @@ function _gave_answer_and_remaker_wrong_answer(answers, right_answers, selected_
     answers[i][5] = " grayb";
     //}
   }
-  console.log("BBBB")
+  // console.log("BBBB")
 }
 
 function data_state_change(fulldata, mode, selected_idxs) {

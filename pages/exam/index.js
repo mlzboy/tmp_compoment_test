@@ -1,6 +1,5 @@
 var store = require("../../utils/store.js")
 var core = require("../../utils/core.js")
-var js = require("../../utils/evil-eval.es5.min.js")
 
 //获取应用实例
 const app = getApp()
@@ -12,7 +11,7 @@ Page({
     showDialog:false,
     course:"大学心理学",
     exam_no:0,
-    category:undefined,
+    category:'',
     list:[],
     mode: 'exam',
     idata: [
@@ -75,9 +74,10 @@ Page({
   change_mode:function(e){
     console.log("change_mode")
     var panel = e.currentTarget.dataset.info;
-    console.log("info---------------------------------",panel)
+    // console.log("info---------------------------------",panel)
     store._set("panel", panel)
-    if (this.data.category == undefined){
+    
+    if (this.data.category.length == 0){
       wx.redirectTo({
         url: `/pages/exam/index?course=${this.data.course}&exam_no=${this.data.exam_no}`,
       })      
@@ -92,9 +92,10 @@ Page({
   onLoad: function (params) {
     console.log(typeof params.exam_no)
     console.log(typeof params.course)
+    console.log(typeof params.category)
     this.data.course = params.course
-    this.data.exam_no = parseInt(params.exam_no)
-    this.data.category = params.category
+    this.data.exam_no = (params.exam_no == undefined) ? -1 : params.exam_no//考试页时有此项
+    this.data.category = (params.category == undefined) ? "" : params.category//专项练习有此项
     console.log("course",this.data.course)
     console.log("exam_no",this.data.exam_no)
     console.log("category",this.data.category)
@@ -104,8 +105,11 @@ Page({
     let title = this.data.course 
     this.data.mode = "practice"
     let panel = store.get_panel_from_localstoage(this.data.mode)
-    this.data.mode = panel
-    switch(this.data.category || this.data.exam_no){
+    if (panel != "exam_or_exam_show")
+    {
+      this.data.mode = panel
+    }
+    switch(this.data.category){
       case "single":
         current_x_idxs = DATA.single_idxs
         title += " 单选题"
@@ -126,16 +130,13 @@ Page({
         current_x_idxs = store.wrong_idxs(this.data.course)
         title += " 错题"
         break
-      case undefined:
-        current_x_idxs = undefined
-        break
       default://exam
-        current_x_idxs = DATA.exam_idxs[this.data.exam_no]
+        current_x_idxs = DATA.exam_idxs[parseInt(this.data.exam_no)]
         title += " " + core.digital_number_to_chinese_number(this.data.exam_no,"卷")
-        if ((this.data.mode == "exam") && (store.is_examed(this.data.course,this.data.exam_no) == true)){
+        this.data.mode = "exam"
+        if (store.is_examed(this.data.course,this.data.exam_no)){
           this.data.mode = "exam_show"
         }
-        this.data.mode = "exam"
         //from localstoage load selected panel data otherwise use mode status as selected panel
         panel = store.get_panel_from_localstoage(this.data.mode)
         console.log("data panel", panel)
@@ -147,15 +148,18 @@ Page({
             this.data.mode = "exam"
           }
         }
+        else if (panel == "practice"){
+          this.data.mode = "exam"
+        }
         else {
           this.data.mode = panel
         }
-        console.log(panel)
+        console.log(panel,this.data.mode)
         break;
     }
-    console.log(current_x_idxs)
+    console.log("A111111111111111111111111111")
+    // console.log(current_x_idxs)
     console.log("current_x_idx length:",current_x_idxs.length)
-    console.log(current_x_idxs)
     
     wx.setNavigationBarTitle({
       title:title

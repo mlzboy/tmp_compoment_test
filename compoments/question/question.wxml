@@ -1,5 +1,4 @@
-<!-- 引入.wxs文件 src为相对路径，module指定当前模块的名称 -->
-<wxs module="f" src="./common.wxs"></wxs>
+
 
 <scroll-view>
 {{data[0]}}

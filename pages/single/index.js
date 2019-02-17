@@ -78,7 +78,7 @@ Page({
     console.log("change_mode")
     
     var panel = e.currentTarget.dataset.info;
-    console.log("info---------------------------------",panel)
+    // console.log("info---------------------------------",panel)
     if (panel == "exam_or_exam_show"){
       store._set("panel", panel)
     }
@@ -161,28 +161,6 @@ Page({
   },
   myLinsterner(e) {
    console.log("icountdown finished")
-   },
-  loadmore: function(){
-    var that = this;
-    console.log("bbbbbbbbbbbbbbbbbbbbbbbb")
-    console.log(current_exam_idx)
-    current_exam_idx = exam_idxs.exam_idxs[course][exam_no]
-    console.log(course)
-    console.log("current_exam_idx",current_exam_idx)
-    console.log("page",page)
-    console.log("-------", forward_idxs.forward_idxs)
-    let current_page = that.data.current_page + 1
-    console.log(current_page)
-    let idata = forward_idxs.forward_idxs[current_exam_idx[current_page]]
-    console.log(idata)
-    list = list.concat(list)
-    this.setData({ list: list })
-
-  },
-  tabClick: function (e) {
-    this.setData({
-      activeIndex: e.currentTarget.id
-    });
-  },
+   }
 
 })
