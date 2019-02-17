@@ -1,0 +1,184 @@
+::-webkit-scrollbar{
+    width: 0;
+    height: 0;
+    color: transparent;
+}
+.hidden
+{
+  display:none;
+}
+.on
+{
+  display:block;
+}
+
+.memory_header
+{
+margin:40rpx 0 40rpx 40rpx;
+display:flex;
+flex-direction:row;
+align-items:center;
+}
+
+.memory_icon {
+border-radius: 15rpx;
+width: 12rpx;
+height: 30rpx; 
+font-size: 30rpx;
+text-align: center;
+line-height: 30rpx;
+  background: #00c355;
+
+
+}
+.memory_title
+{
+
+margin-left: 24rpx;
+font-size: 36rpx;
+line-height: 36rpx;
+height:36rpx;
+font-weight: normal;
+word-break: break-all;
+}
+
+
+
+.memory_content
+{
+  margin: 30rpx 0;
+  display: flex;
+  justify-content: center;
+}
+.clear
+{
+clear:both;
+height:0;
+}
+
+
+
+
+
+
+.block_test
+{
+  display:inline-block;
+}
+.text_test
+{
+  text-align:center;
+  color:gray;
+  font-size: 24rpx;
+  margin:5rpx 40rpx 15px 40rpx;
+}
+
+.sv
+{
+  width:90%;
+ display:flex; justify-content:center; align-items:center;
+     overflow: hidden;
+    white-space: nowrap;
+    height: 350rpx;
+    margin:0 auto;
+
+}
+.sv2 
+{
+   width: 90%;
+    display:flex; justify-content:center; align-items:center;
+    overflow: hidden;
+    white-space: nowrap;
+    height: 190rpx;
+    margin:0 20rpx;
+    z-index: 100;
+}
+.a
+{
+background: linear-gradient(120deg, #51DF69,#45C459);
+}
+.b
+{
+background: linear-gradient(120deg, lightsalmon,red);
+}
+.c
+{
+background: linear-gradient(120deg,lightskyblue,skyblue);
+}
+.d
+{
+  background:linear-gradient(120deg,orange,orange);
+}
+
+.icon_test
+{
+  display: inline-block;
+  border-radius: 120rpx;
+  text-align: center;
+  color:white;
+  width:120rpx;
+  height:120rpx;
+  line-height: 120rpx;
+  margin:0 25rpx;
+  font-size: 60rpx;
+  font-weight: bold;
+  /*background-color:#00c355; */
+}
+
+
+
+
+swiper{
+  width:100%;
+  margin:0 40rpx;
+  height: 900rpx;
+ }
+ swiper image{
+  width:100%;
+  height:400rpx;
+ }
+
+
+
+.weui-navbar{
+  margin:0;
+  padding:0;
+   width: 100%;
+   /*
+   position: fixed;
+   
+   border-bottom: 1px solid #00c355;
+   */
+   box-sizing: border-box;
+   white-space: nowrap; 
+   z-index: 100;
+   background: white;
+}
+
+.weui-navbar .default-item{
+  /*width:25%;*/
+  display: inline-block;
+  text-align: center;
+  font-size: 36rpx;
+  box-sizing: border-box;
+  height: 7%;
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+  width:240rpx;
+}
+.weui-navbar .item_on{
+   /*color: #00c355;*/
+}
+.weui-navbar-slider{
+    position: absolute;
+    border-radius: 12rpx;
+    width: 30rpx;
+    height: 12rpx;
+    content:"";
+    /*background: #00c355;*/
+    bottom: 0px;
+    left: 0rpx;
+    transition: transform .3s;
+}
+
+

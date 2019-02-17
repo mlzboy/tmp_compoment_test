@@ -1,34 +1,14 @@
+
+var add_wrong = (course,id) => _add_Xed(course + "_wrong",id)
+var remove_wrong = (course,id) => _remove_Xed(course+"_wrong",id)
+var add_star = (course,id) => _add_Xed(course + "_star",id)
+var remove_star = (course,id) => _remove_Xed(course + "_star",id)
 var is_practiced = (course,id) => _is_Xed(course + "_practiced",id)
 var add_practiced = (course,id) => _add_Xed(course + "_practiced",id)
-//var is_examed = id => _is_Xed("examed",id)
-//var add_examed = id => _add_Xed("examed",id)
+var is_examed = (course,id) => _is_Xed(course + "_examed",id)
+var add_examed = (course,id) => _add_Xed(course + "_examed",id)
 
-function is_examed(course,exam_no){
-  let ret = []
-  if (_has_key(course + "_examed")){
-    ret = _get(course + "_examed")
-  }
-  if (ret.includes(exam_no)){
-    return true;
-  }
-  return false;
-}
 
-function add_examed(course,exam_no)
-{
-  let key = exam_no
-  let ret = []
-  if (_has_key(course + "_examed")){
-    ret = _get(course + "_examed") 
-  }
-  if (ret.includes(key) == false)
-  {
-    ret.push(key)
-    _set(course + "_examed",ret)
-    return 1;
-  }
-  return 0;
-}
 /*
 删除examed key中对应的考试的值，
 同时删除以exam_course_exam_no命名的上次考试选择的键
@@ -91,6 +71,21 @@ function _add_Xed(key,id)
   return true
 }
 
+function _remove_Xed(key,id){
+  let list = []
+  if (_has_key(key)){
+    list = _get(key)
+    let ret = list.indexOf(id)
+    if (ret > -1){
+        //删除list中存在的idx
+        list.splice(ret,1)
+        _set(key,list)
+        return true
+    }
+  }
+  return false
+}
+
 
 /*
 selected_idxs,此前选中的数据，一般为[],[0],[1],[2],[3]
@@ -129,6 +124,30 @@ function _set(key,value)
 {
   wx.setStorageSync(key.toString(), value)
   //dict[key]= value
+}
+
+function get_star_idxs(course){
+  let key = course + "_star"
+  if (_has_key(key))
+  {
+      return _get(key)
+  }
+  else
+  {
+    return []
+  }
+}
+
+function get_wrong_idxs(course){
+  let key = course + "_wrong"
+  if (_has_key(key))
+  {
+      return _get(key)
+  }
+  else
+  {
+    return []
+  }  
 }
 
 /*
@@ -202,6 +221,12 @@ function _get_panel_from_localstorage(init_panel){
 
 
 module.exports = {
+  get_wrong_idxs:get_wrong_idxs,
+  get_star_idxs:get_star_idxs,
+  add_star:add_star,
+  remove_star:remove_star,
+  add_wrong:add_wrong,
+  remove_wrong:remove_wrong,
   get_panel_from_localstoage:_get_panel_from_localstorage,
   _set:_set,
   _get:_get,
@@ -215,10 +240,5 @@ module.exports = {
   process_multiple_selected_logic:process_multiple_selected_logic,
   process_single_selected_logic:process_single_selected_logic,
 }
-/*
-console.log(set(1,1))
-console.log(set(1,2))
 
-console.log(set(1,1))
-*/
 

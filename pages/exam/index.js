@@ -113,23 +113,25 @@ Page({
     switch(this.data.category){
       case "single":
         current_x_idxs = DATA.single_idxs
-        title += " 单选题"
+        title += " 单选题集"
         break
       case "mutiple":
+        console.log("mutiple................")
         current_x_idxs = DATA.mutiple_idxs
-        title += " 多选题"
+        console.log(current_x_idxs)
+        title += " 多选题集"
         break
       case "judge":
         current_x_idxs = DATA.judge_idxs
-        title += " 判断题"
+        title += " 判断题集"
         break
       case "star":
-        current_x_idxs = store.star_idxs(this.data.course)
-        title += " 收藏题"
+        current_x_idxs = store.get_star_idxs(this.data.course)
+        title += " 收藏题集"
         break
       case "wrong":
-        current_x_idxs = store.wrong_idxs(this.data.course)
-        title += " 错题"
+        current_x_idxs = store.get_wrong_idxs(this.data.course)
+        title += " 错题集"
         break
       default://exam
         current_x_idxs = DATA.exam_idxs[this.data.exam_no]

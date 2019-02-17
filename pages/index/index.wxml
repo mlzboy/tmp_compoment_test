@@ -1,0 +1,59 @@
+<view >
+    <scroll-view scroll-x="true" class="tab-h" scroll-left="{{scrollLeft}}">
+        <view class="tab-item {{currentTab==0?'active':''}}"  data-current="0" bindtap="swichNav">大学心理学</view>
+        <view class="tab-item {{currentTab==1?'active':''}}" data-current="1" bindtap="swichNav">高等教育法规</view>
+        <view class="tab-item {{currentTab==2?'active':''}}" data-current="2" bindtap="swichNav">大学教育学</view>
+        <view class="tab-item {{currentTab==3?'active':''}}" data-current="3" bindtap="swichNav">教师伦理学</view>
+    </scroll-view>
+    <swiper class="tab-content" current="{{currentTab}}" duration="300" bindchange="switchTab"
+     style="height:{{winHeight}}rpx">
+        <swiper-item wx:for="{{list}}" wx:for-item="string" wx:for-index="idx2">
+    <view class="memory_title">题库</view>
+  <view class="row">
+    <block wx:for="{{string}}" wx:for-index="idx" wx:for-item="char" >
+        <navigator url="/pages/exam/index?course={{courses[idx2]}}&exam_no={{idx}}" open-type="navigate" hover-class="none">
+        <view class="exam">
+            <view class="icon_test">{{string[idx]}}</view>
+            <view class="text_test">{{list2[idx]}}</view>
+        </view>
+        </navigator>
+    </block>
+  </view>
+    <view class="memory_title">专题练习</view>
+  <view class="row">
+    <navigator url="/pages/exam/index?course={{courses[idx2]}}&category=single" open-type="navigate" hover-class="none">
+      <view class="exam">
+        <view class="icon_test">单</view>
+        <view class="text_test">单选题</view>
+      </view>
+    </navigator>
+    <navigator url="/pages/exam/index?course={{courses[idx2]}}&category=mutiple" open-type="navigate" hover-class="none">
+      <view class="exam">
+        <view class="icon_test">多</view>
+        <view class="text_test">多选题</view>
+      </view>
+    </navigator>
+    <navigator url="/pages/exam/index?course={{courses[idx2]}}&category=judge" open-type="navigate" hover-class="none">
+      <view class="exam">
+        <view class="icon_test">判</view>
+        <view class="text_test">判断题</view>
+      </view>
+    </navigator>
+    <navigator url="/pages/exam/index?course={{courses[idx2]}}&category=star" open-type="navigate" hover-class="none">
+    <view class="exam">
+        <view class="icon_test">藏</view>
+        <view class="text_test">收藏</view>
+      </view>
+    </navigator>
+    <navigator url="/pages/exam/index?course={{courses[idx2]}}&category=wrong" open-type="navigate" hover-class="none">
+     <view class="exam">
+        <view class="icon_test">错</view>
+        <view class="text_test">错题集</view>
+      </view>
+    </navigator>
+
+  </view>
+
+        </swiper-item>
+    </swiper>
+</view>
