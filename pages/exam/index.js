@@ -8,6 +8,7 @@ var DATA;
 Page({
   
   data: {
+    current_x_idxs:[],
     practice_or_examed_number:0,
     total:0,
     score:0,
@@ -39,58 +40,56 @@ Page({
     ],
     is_vip: false
   },
-  answered_question:function(e){
+  answered_question:function(){
     //只对exam和practice进行统计做过的题
     //通过统计course_mode_category或course_exam_exam_no中的数据来作为作过题的统计
-    console.log("answer_question",e.detail.id,e.detail.idx)
+    // console.log("answer_question",e.detail.id,e.detail.idx)
     if (this.properties.mode == "practice")
     {
-      let key = `${this.properties.course}_${this.properties.category}_practiced`
-      let ids = store._get(key)
-      this.data.practice_or_examed_number = ids.length
-    }
-    else if (this.properties.mode == "exam")
-    {
-      let key = `${this.properties.course}_${this.properties.mode}_${this.properties.exam_no}`
-      let selected_idxs = store._get(key)
-      console.log("---------------selected_idx",selected_idxs)
+      // let key = `${this.properties.course}_${this.properties.category}_practiced`
+      // let ids = store._get(key)
+      // this.data.practice_or_examed_number = ids.length
+      let key = `${this.properties.course}_${this.properties.mode}_${this.properties.category}`
+      let user_selected_idxs = store._get(key)//用户做完的题id集合
+
       let cnt = 0
-      for (let key in selected_idxs){
-        console.log("zzzz==>",selected_idxs[key],typeof selected_idxs[key],selected_idxs[key].length)
-        if (selected_idxs[key].length > 0)
-        {
-          console.log(key)
+      for (let key in user_selected_idxs){
+        if (user_selected_idxs[key].length > 0){
           cnt += 1
         }
       }
       this.data.practice_or_examed_number = cnt
+      //已做的标红或绿
+      this.data.list2 = core.mark_the_circle(user_selected_idxs,this.data.current_x_idxs,DATA.forward_idxs)
+      this.setData({
+        practice_or_examed_number:this.data.practice_or_examed_number,
+        list2:this.data.list2
+      })   
     }
-    this.setData({practice_or_examed_number:this.data.practice_or_examed_number})
-    // let key1 = key + "_idx"
-    // let key2 = key + "_id"
-    // store.add_answered(key+"_idx",e.detail.no)//1-x索引
-    // store.add_answered(key+"_id",e.detail.id)//正排id
-    // let nos = store._get(key1)
-    // let ids = store._get(key2)
-    // console.log("nos:",nos)
-    // this.data.practice_or_examed_number = nos.length
-    // for(let i = 0 ; i < this.data.list.length; ++i){
-    //   let ret = nos.indexOf(i+1)
-    //   if (ret > -1){
-    //     let id = ids[ret]
-    //     DATA.forward_idxs[id]
-
-
-    //   }
-    //   if (nos.includes(i+1)){
-    //     this.data.list2.push(nos.includes(i+1))
-    //   }
-    // }
-    // console.log("list2:",this.data.list2)
-    // this.setData({
-    //   practice_or_examed_number:this.data.practice_or_examed_number,
-    //   list2:this.data.list2
-    // })
+    else if (this.properties.mode == "exam" || this.properties.mode == "exam_show")
+    {
+      let key = `${this.properties.course}_exam_${this.properties.exam_no}`
+      let user_selected_idxs = store._get(key)
+      // console.log("---------------selected_idx",selected_idxs)
+      let cnt = 0
+      for (let key in user_selected_idxs){
+        // console.log("zzzz==>",selected_idxs[key],typeof selected_idxs[key],selected_idxs[key].length)
+        if (user_selected_idxs[key].length > 0)
+        {
+          // console.log(key)
+          cnt += 1
+        }
+      }
+      this.data.practice_or_examed_number = cnt
+      //已做的标灰
+      console.log("===>current_x_idxs:",DATA.current_x_idxs)
+      this.data.list2 = core.mark_the_circle2(user_selected_idxs,this.data.current_x_idxs,DATA.forward_idxs)
+      this.setData({
+        practice_or_examed_number:this.data.practice_or_examed_number,
+        list2:this.data.list2
+      })   
+    }
+ 
 
   },
   submit_exam:function(){
@@ -159,7 +158,7 @@ Page({
     console.log("category",this.data.category)
     //load require bussiness data
     DATA = require("../../data/" + this.data.course + ".js")
-    let current_x_idxs = []
+    // let current_x_idxs = []
     let title = this.data.course 
     this.data.mode = "practice"
     let panel = store.get_panel_from_localstoage(this.data.mode)
@@ -169,29 +168,29 @@ Page({
     }
     switch(this.data.category){
       case "single":
-        current_x_idxs = DATA.single_idxs
+        this.data.current_x_idxs = DATA.single_idxs
         title += " 单选题集"
         break
       case "mutiple":
         console.log("mutiple................")
-        current_x_idxs = DATA.mutiple_idxs
-        console.log(current_x_idxs)
+        this.data.current_x_idxs = DATA.mutiple_idxs
+        console.log(this.data.current_x_idxs)
         title += " 多选题集"
         break
       case "judge":
-        current_x_idxs = DATA.judge_idxs
+        this.data.current_x_idxs = DATA.judge_idxs
         title += " 判断题集"
         break
       case "star":
-        current_x_idxs = store.get_star_idxs(this.data.course)
+        this.data.current_x_idxs = store.get_star_idxs(this.data.course)
         title += " 收藏题集"
         break
       case "wrong":
-        current_x_idxs = store.get_wrong_idxs(this.data.course)
+        this.data.current_x_idxs = store.get_wrong_idxs(this.data.course)
         title += " 错题集"
         break
       default://exam
-        current_x_idxs = DATA.exam_idxs[this.data.exam_no]
+        this.data.current_x_idxs = DATA.exam_idxs[this.data.exam_no]
         title += " " + core.digital_number_to_chinese_number(this.data.exam_no,"卷")
         this.data.mode = "exam"
         if (store.is_examed(this.data.course,this.data.exam_no)){
@@ -229,16 +228,16 @@ Page({
         console.log(panel,this.data.mode)
         break;
     }
-    this.data.total = current_x_idxs.length
+    this.data.total = this.data.current_x_idxs.length
     console.log("A111111111111111111111111111")
     // console.log(current_x_idxs)
-    console.log("current_x_idx length:",current_x_idxs.length)
+    console.log("current_x_idx length:",this.data.current_x_idxs.length)
     
     wx.setNavigationBarTitle({
       title:title
     })
     this.data.list = []
-    for(let idx of current_x_idxs)
+    for(let idx of this.data.current_x_idxs)
     {
       this.data.list.push(DATA.forward_idxs[idx])
     }
@@ -246,7 +245,10 @@ Page({
     
     console.log("====>>>>mode:",this.data.mode)
     //list =[this.data.idata,this.data.idata]
+    console.log("=====list2:",this.data.list2)
     this.setData({
+      current_x_idxs:this.data.current_x_idxs,
+      list2:this.data.list2,
       list:this.data.list,
       targetTime2: new Date().getTime() + 30 * 60 * 1000,
       course:this.data.course,
@@ -256,8 +258,8 @@ Page({
       total:this.data.total
     })
  
-
-
+    //同步做过的题的数据，做过的题目数及相应的下拉跳转圈的颜色（考试状态的灰色、练习状态的红绿色）
+    this.answered_question();
   },
   jump:function(e){
     var tid = e.currentTarget.dataset.tid;

@@ -21,8 +21,8 @@
 <view class="footerx {{ showDialog ? ' show' : '' }}" style="">
   <scroll-view scroll-y="true"  style="height:600rpx;margin:10rpx 80rpx 0 40rpx">
     <view class="option">
-      <block  wx:for="{{list}}" wx:for-index="idx" wx:for-item="idata" wx:key="{{idata[0]}}">
-        <text class="circle white" data-tid="t{{idx+1}}" bindtap="jump">{{idx+1}}</text>
+      <block  wx:for="{{list2}}" wx:for-index="idx" wx:for-item="cls" wx:key="{{idata[0]}}">
+        <text class="circle {{cls}}" data-tid="t{{idx+1}}" bindtap="jump">{{idx+1}}</text>
       </block>
     </view>
   </scroll-view>

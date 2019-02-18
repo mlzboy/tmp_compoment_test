@@ -1,6 +1,65 @@
 var store = require("./store.js")
 
 /*
+user_selected_idxs:格式如右{"0":[1],"1":[2]} Object型
+输出的文件是一个[orange or green] list
+*/
+function mark_the_circle(user_selected_idxs,invert_idxs,forward_idxs){
+  let user_done_ids = Object.keys(user_selected_idxs)// string id list
+  let list = []
+  var score = 0
+  for (let idx = 0 ; idx < invert_idxs.length; ++idx){
+    let id = invert_idxs[idx]
+    if (user_done_ids.includes(id.toString())){
+      //对于做过的题目，判断对错并区别颜色进行标记
+      let user_answer_idxs = user_selected_idxs[id] // [1,2] or [1] or []
+      console.log("user_answer_idxs",user_answer_idxs)
+      let right_answer_idxs = []
+      let right_answers = forward_idxs[id][3]
+      for (let char of right_answers){
+        right_answer_idxs.push(char.charCodeAt() - 65)
+      }
+      console.log("right_answer_idxs:",right_answer_idxs)
+      if (right_answer_idxs.sort().toString() == user_answer_idxs.sort().toString()){
+        list.push("green")
+      }
+      else{
+        list.push("orange")
+      }
+    }
+    else{
+      list.push("white")
+    }
+  }
+  return list
+}
+
+/*
+user_selected_idxs:格式如右{"0":[1],"1":[2]} Object型
+输出的文件是一个[orange or green] list
+*/
+function mark_the_circle2(user_selected_idxs,invert_idxs,forward_idxs){
+  let user_done_ids = Object.keys(user_selected_idxs)// string id list
+  console.error("user_done_ids:",user_done_ids)
+  let list = []
+  var score = 0
+  for (let idx = 0 ; idx < invert_idxs.length; ++idx){
+    let id = invert_idxs[idx].toString()
+    if (user_done_ids.includes(id)){
+      console.error("id:",id)
+      //对于选择的题目进行灰色标记
+      list.push("grayd")
+    }
+    else{
+      list.push("white")
+    }
+  }
+  console.error(list)
+  return list
+}
+
+
+/*
 user_selected_idxs格式
 大学心理学_exam_0
 {
@@ -152,7 +211,7 @@ output:[["abcdefgh", "2,4;5,6", "A"],
 ["abcdefgh", "2,4;5,6", "C"]]
 */
 function add_answers_char(answers) {
-  console.log("add_answers_char",answers,answers.length,typeof answers)
+  // console.log("add_answers_char",answers,answers.length,typeof answers)
   for (let i = 0; i < answers.length; ++i) {
     answers[i].push(String.fromCharCode(i + 65))
     //console.log(answers[i])
@@ -372,6 +431,8 @@ function data_state_change(fulldata, mode, selected_idxs) {
 }
 
 module.exports = {
+  mark_the_circle:mark_the_circle,
+  mark_the_circle2:mark_the_circle2,
   count_the_score:count_the_score,
   highlight_answer: highlight_answer,
   highlight_answers: highlight_answers,
@@ -399,7 +460,7 @@ function _gave_selected_options_gray_backgroud(answers, selected_idxs) {
 function _prepare_data(fulldata, selected_idxs, mode) {
   let _fulldata = deepCopy(fulldata);
   let answers = _fulldata[1];
-  console.log("answers===>",answers)
+  // console.log("answers===>",answers)
   answers = add_answers_char(answers); //每一个answer现在有三项[question,hightlight_idxs,'A']
   let right_answers = _fulldata[3];
   //判断多选的确定按钮为灰色还是绿色
