@@ -1,5 +1,37 @@
 var store = require("./store.js")
 
+
+/*
+返回加入错题集的数量
+*/
+function batch_add_wronged(course,user_selected_idxs,invert_idxs,forward_idxs){
+  let cnt = 0
+  let user_done_ids = Object.keys(user_selected_idxs)// string id list
+  for (let idx = 0 ; idx < invert_idxs.length; ++idx){
+    let id = invert_idxs[idx]
+    if (user_done_ids.includes(id.toString())){
+      //对于做过的题目，判断对错并区别颜色进行标记
+      let user_answer_idxs = user_selected_idxs[id] // [1,2] or [1] or []
+      console.log("user_answer_idxs",user_answer_idxs)
+      let right_answer_idxs = []
+      let right_answers = forward_idxs[id][3]
+      for (let char of right_answers){
+        right_answer_idxs.push(char.charCodeAt() - 65)
+      }
+      console.log("right_answer_idxs:",right_answer_idxs)
+      if (right_answer_idxs.sort().toString() != user_answer_idxs.sort().toString()){
+        if (store.is_wronged(course,id) == false){
+          store.add_wronged(course,id)
+          cnt += 1
+        }
+      }
+
+    }
+
+  }
+  return cnt
+}
+
 /*
 user_selected_idxs:格式如右{"0":[1],"1":[2]} Object型
 输出的文件是一个[orange or green] list
@@ -211,7 +243,7 @@ output:[["abcdefgh", "2,4;5,6", "A"],
 ["abcdefgh", "2,4;5,6", "C"]]
 */
 function add_answers_char(answers) {
-  // console.log("add_answers_char",answers,answers.length,typeof answers)
+  console.log("add_answers_char",answers,answers.length,typeof answers)
   for (let i = 0; i < answers.length; ++i) {
     answers[i].push(String.fromCharCode(i + 65))
     //console.log(answers[i])
@@ -261,7 +293,7 @@ fulldata为初始完成一道题的数据，fulldata[1]中每一个answer最初�
 
 function parctice_tap_confirm_or_exam_show_mode_or_exam_full_submit(course,category,fulldata, mode, selected_idxs)
 {
-  let { _fulldata, answers, right_answers } = _prepare_data(fulldata, selected_idxs, mode);//只有通过practiceu状态确定按钮提交,或是exam状态整体提交才变为true,表示该题已做
+  let { _fulldata, answers, right_answers } = _prepare_data(course,fulldata, selected_idxs, mode);//只有通过practiceu状态确定按钮提交,或是exam状态整体提交才变为true,表示该题已做
   /*
   if (((mode == "practice") && (_fulldata[4] == "M")) || (mode == "exam_show"))//立马出结果
   {
@@ -314,8 +346,8 @@ function _gave_answer_and_remaker_wrong_answer(answers, right_answers, selected_
   // console.log("BBBB")
 }
 
-function data_state_change(fulldata, mode, selected_idxs) {
-  let { _fulldata, answers, right_answers } = _prepare_data(fulldata, selected_idxs, mode);//只有通过practiceu状态确定按钮提交,或是exam状态整体提交才变为true,表示该题已做
+function data_state_change(course,fulldata, mode, selected_idxs) {
+  let { _fulldata, answers, right_answers } = _prepare_data(course,fulldata, selected_idxs, mode);//只有通过practiceu状态确定按钮提交,或是exam状态整体提交才变为true,表示该题已做
   
   //用记勾选了选项，变更其颜色状态，此项只会在多选题调用
   if (((mode == "exam") || (mode == "practice")) && (selected_idxs.length > 0) && (_fulldata[4] == 'M')) {
@@ -431,12 +463,13 @@ function data_state_change(fulldata, mode, selected_idxs) {
 }
 
 module.exports = {
+  batch_add_wronged:batch_add_wronged,
   mark_the_circle:mark_the_circle,
   mark_the_circle2:mark_the_circle2,
   count_the_score:count_the_score,
-  highlight_answer: highlight_answer,
-  highlight_answers: highlight_answers,
-  add_answer_char:add_answers_char,
+  // highlight_answer: highlight_answer,
+  // highlight_answers: highlight_answers,
+  // add_answer_char:add_answers_char,
   data_state_change:data_state_change,
   parctice_tap_confirm_or_exam_show_mode_or_exam_full_submit:parctice_tap_confirm_or_exam_show_mode_or_exam_full_submit,
   digital_number_to_chinese_number:digital_number_to_chinese_number
@@ -457,26 +490,34 @@ function _gave_selected_options_gray_backgroud(answers, selected_idxs) {
   }
 }
 
-function _prepare_data(fulldata, selected_idxs, mode) {
+function _prepare_data(course,fulldata, selected_idxs, mode) {
   let _fulldata = deepCopy(fulldata);
+  let id = _fulldata[0]
   let answers = _fulldata[1];
   // console.log("answers===>",answers)
   answers = add_answers_char(answers); //每一个answer现在有三项[question,hightlight_idxs,'A']
   let right_answers = _fulldata[3];
-  //判断多选的确定按钮为灰色还是绿色
+  //判断多选的确定按钮为灰色还是绿色 r[7]
   if (selected_idxs.length > 1) {
     _fulldata.push(" green");
   }
   else {
     _fulldata.push(" grayc");
   }
-  //用于确定是否显示`确认`按钮
+  //用于确定是否显示`确认`按钮 r[8]
   if ((mode == "practice") && (_fulldata[4] == 'M')) {
     _fulldata.push(true);
   }
   else {
     _fulldata.push(false);
   }
-  _fulldata.push(false); //只有通过practice状态确定按钮提交,或是exam状态整体提交才变为true,表示该题已做
+  _fulldata.push(false); //只有通过practice状态确定按钮提交,或是exam状态整体提交才变为true,表示该题已做 r[9]
+  let part_key = course
+  if (store.is_stared(part_key,id)){
+    _fulldata.push(true) //增加题目是否被收藏 r[10]
+  }
+  else{
+    _fulldata.push(false)
+  }
   return { _fulldata, answers, right_answers };
 }

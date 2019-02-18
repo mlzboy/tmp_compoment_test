@@ -1,8 +1,12 @@
 
-var add_wrong = (course,id) => _add_Xed(course + "_wrong",id)
-var remove_wrong = (course,id) => _remove_Xed(course+"_wrong",id)
-var add_star = (course,id) => _add_Xed(course + "_star",id)
-var remove_star = (course,id) => _remove_Xed(course + "_star",id)
+var add_wronged = (course,id) => _add_Xed(course + "_wronged",id)
+var remove_wronged = (course,id) => _remove_Xed(course+"_wronged",id)
+var is_wronged = (course,id) => _is_Xed(course + "_wronged",id)
+
+//var get_stared 
+var add_stared = (course,id) => _add_Xed(course + "_stared",id)
+var remove_stared = (course,id) => _remove_Xed(course + "_stared",id)
+var is_stared = (course,id) => _is_Xed(course + "_stared",id)
 var is_practiced = (course,category,id) => _is_Xed(course + "_" + category + "_practiced",id)
 var add_practiced = (course,category,id) => _add_Xed(course + "_" + category + "_practiced",id)
 var is_examed = (course,id) => _is_Xed(course + "_examed",id)
@@ -134,7 +138,7 @@ function _set(key,value)
 }
 
 function get_star_idxs(course){
-  let key = course + "_star"
+  let key = course + "_stared"
   if (_has_key(key))
   {
       return _get(key)
@@ -146,7 +150,7 @@ function get_star_idxs(course){
 }
 
 function get_wrong_idxs(course){
-  let key = course + "_wrong"
+  let key = course + "_wronged"
   if (_has_key(key))
   {
       return _get(key)
@@ -231,10 +235,12 @@ module.exports = {
   add_answered:add_answered,
   get_wrong_idxs:get_wrong_idxs,
   get_star_idxs:get_star_idxs,
-  add_star:add_star,
-  remove_star:remove_star,
-  add_wrong:add_wrong,
-  remove_wrong:remove_wrong,
+  is_stared:is_stared,
+  add_stared:add_stared,
+  remove_stared:remove_stared,
+  is_wronged:is_wronged,
+  add_wronged:add_wronged,
+  remove_wronged:remove_wronged,
   get_panel_from_localstoage:_get_panel_from_localstorage,
   _set:_set,
   _get:_get,

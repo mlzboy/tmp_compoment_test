@@ -40,6 +40,11 @@ Page({
     ],
     is_vip: false
   },
+  remove_from_wrong_page:function(){
+    wx.redirectTo({
+      url: `/pages/exam/index?course=${this.data.course}&category=${this.data.category}`,
+    }) 
+  },
   answered_question:function(){
     //只对exam和practice进行统计做过的题
     //通过统计course_mode_category或course_exam_exam_no中的数据来作为作过题的统计
@@ -66,7 +71,7 @@ Page({
         list2:this.data.list2
       })   
     }
-    else if (this.properties.mode == "exam" || this.properties.mode == "exam_show")
+    else if (this.properties.mode == "exam")
     {
       let key = `${this.properties.course}_exam_${this.properties.exam_no}`
       let user_selected_idxs = store._get(key)
@@ -89,6 +94,28 @@ Page({
         list2:this.data.list2
       })   
     }
+    else if(this.properties.mode == "exam_show")
+    {
+      let key = `${this.properties.course}_exam_${this.properties.exam_no}`
+      let user_selected_idxs = store._get(key)
+      // console.log("---------------selected_idx",selected_idxs)
+      let cnt = 0
+      for (let key in user_selected_idxs){
+        // console.log("zzzz==>",selected_idxs[key],typeof selected_idxs[key],selected_idxs[key].length)
+        if (user_selected_idxs[key].length > 0)
+        {
+          // console.log(key)
+          cnt += 1
+        }
+      }
+      this.data.practice_or_examed_number = cnt
+      //已做的标红或绿
+      this.data.list2 = core.mark_the_circle(user_selected_idxs,this.data.current_x_idxs,DATA.forward_idxs)
+      this.setData({
+        practice_or_examed_number:this.data.practice_or_examed_number,
+        list2:this.data.list2
+      })   
+    }
     else{
       let arr = new Array(this.data.total)
       arr.fill("white",0,this.data.total)
@@ -100,6 +127,10 @@ Page({
   submit_exam:function(){
     console.log("submit_exam")
     store.add_examed(this.data.course,this.data.exam_no)
+    //对于用户进行过点选的题目且选择的答案不对的批量加入错题集
+    let key = `${this.properties.course}_exam_${this.properties.exam_no}`
+    let user_selected_idxs = store._get(key)
+    core.batch_add_wronged(this.data.course,user_selected_idxs,this.data.current_x_idxs,DATA.forward_idxs)
     console.log("TTTT")
     this.setData({mode:"exam_show",list:this.data.list})
     wx.redirectTo({

@@ -1,22 +1,29 @@
 
 
 <scroll-view>
-{{data[0]}},{{no}}
 <view class="header">
-  <block wx:if="{{data[4]=='S'}}">
-  <text class="category">单选</text>
-  </block>
-    <block wx:if="{{data[4]=='M'}}">
-  <text class="category">多选</text>
-  </block>
-  <block wx:if="{{data[4]=='J'}}">
-  <text class="category">判断</text>
-  </block>
-  <text class="question">{{data[2]}}</text>
+  <view class="icon_left">
+    <block wx:if="{{data[4]=='S'}}">
+    <view class="category">单选</view>
+    </block>
+      <block wx:if="{{data[4]=='M'}}">
+    <view class="category">多选</view>
+    </block>
+    <block wx:if="{{data[4]=='J'}}">
+    <view class="category">判断</view>
+    </block>
+    <block wx:if="{{category=='wrong'}}">
+    <view class="wrong" bindtap="wrong" data-id="{{data[0]}}">×</view>    
+    </block>
+    <block wx:else>
+    <view class="star {{data[10]?'green2':''}}" bindtap="star" data-id="{{data[0]}}">★</view>    
+    </block>
+</view>
+  <view class="question">{{data[2]}}</view>
 </view>
 <view class="main">
 <block  wx:for="{{data[1]}}" wx:for-index="idx" wx:for-item="answer" wx:key="{{answer[2]}}">
-  <view data-idx="{{idx}}" data-id="{{data[0]}}" data-no="{{no}}" class="option{{answer[5]}}" bindtap='tap_select'>
+  <view data-idx="{{idx}}" class="option{{answer[5]}}" bindtap='tap_select'>
 
     <rich-text nodes="<div class='circle {{answer[4]}}'>{{answer[2]}}</div>"></rich-text> 
 

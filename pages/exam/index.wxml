@@ -33,7 +33,7 @@
 <scroll-view class="aa" scroll-y="true"  scroll-into-view="{{toview}}">
 <block  wx:for="{{list}}" wx:for-index="idx" wx:for-item="idata" wx:key="{{idata[0]}}">
 <view id="t{{idx+1}}">
-<c-question category="{{category}}" no="{{idx+1}}" is_vip="{{is_vip}}" idata="{{idata}}" mode="{{mode}}" course="{{course}}" exam_no="{{exam_no}}" bind:answeredQuestion="answered_question"></c-question>
+<c-question category="{{category}}"  is_vip="{{is_vip}}" idata="{{idata}}" mode="{{mode}}" course="{{course}}" exam_no="{{exam_no}}" bind:answeredQuestion="answered_question" bind:removeFromWrongPage="remove_from_wrong_page"></c-question>
 </view>
 </block>
 </scroll-view>

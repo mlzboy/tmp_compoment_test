@@ -19,7 +19,8 @@ word-break: break-all;
 
 .row
 {
-  width:100%;
+  width:93%;
+  margin:0 40rpx 0 40rpx;
 /* margin:40rpx; */
   height: 580rpx;
   line-height: 80rpx;
@@ -27,7 +28,7 @@ word-break: break-all;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-between;
   /* padding:0rpx 40rpx 0rpx 40rpx; */
   /* border-top-style: solid;
   border-top-color: #00c355;
@@ -37,8 +38,8 @@ word-break: break-all;
 .exam{
 display: flex;
 flex-direction: column;
-justify-items: center;
-    
+justify-content: center;
+
 width:130rpx;
 margin-bottom:12rpx;
 }
@@ -82,13 +83,5 @@ margin-bottom:12rpx;
 .tab-item{margin:0 36rpx;display: inline-block;}
 .tab-item.active{color: #00c355;position: relative;}
 .tab-item.active:after{ content: "";display: block;height: 8rpx;width: 52rpx;background: #00c355;position: absolute; bottom: 0;left: 5rpx;border-radius: 16rpx;}
-
-
-
 .tab-content{margin-top: 0rpx;}
-.scoll-h{height: 100%;}
 
-swiper-item{
-    flex-direction: column;
-    align-items: flex-start;
-}
