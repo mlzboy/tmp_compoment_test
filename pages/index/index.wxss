@@ -21,7 +21,7 @@ word-break: break-all;
 {
   width:100%;
 /* margin:40rpx; */
-  height: 620rpx;
+  height: 580rpx;
   line-height: 80rpx;
   font-size: 42rpx;
   display: flex;

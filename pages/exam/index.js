@@ -89,6 +89,11 @@ Page({
         list2:this.data.list2
       })   
     }
+    else{
+      let arr = new Array(this.data.total)
+      arr.fill("white",0,this.data.total)
+      this.setData({list2:arr})
+    }
  
 
   },
