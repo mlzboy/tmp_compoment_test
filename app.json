@@ -18,7 +18,7 @@
     "backgroundColor": "#FFFFFF",
     "list": [
       {
-        "pagePath": "pages/home/index",
+        "pagePath": "pages/index/index",
         "text": "岗培",
         "iconPath": "images/gp2.png",
         "selectedIconPath": "images/gp1.png"

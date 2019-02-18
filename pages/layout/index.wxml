@@ -6,9 +6,9 @@
   </view>
 </view>
 <view class="row1">
-<view class="bl select" style="border-top-left-radius: 8rpx;border-bottom-left-radius: 8rpx;">练习</view>
-<view class="bl ">记忆</view>
-<view class="br " style="border-top-right-radius: 8rpx;border-bottom-right-radius: 8rpx;">VIP记忆</view>
+<view class="bl select" style="border-top-left-radius: 8rpx;border-bottom-left-radius: 8rpx;">111</view>
+<view class="bl ">单</view>
+<view class="br " style="border-top-right-radius: 8rpx;border-bottom-right-radius: 8rpx;">★</view>
 </view>
 <view class="row2">
 <view class="rect"></view>
@@ -17,4 +17,17 @@
 <view class="rect"></view>
 <view class="jump">10/100</view>
 </view>
+
 </view>
+<view style='height:30rpx;'></view>
+<view class="row">
+<view class="row1">
+<view class="bl" style="border-top-left-radius: 8rpx;border-bottom-left-radius: 8rpx;">单选</view>
+<view class="br2" style="border-top-right-radius: 8rpx;border-bottom-right-radius: 8rpx;" bindtap="submit_exam">★☆</view>
+</view>
+</view>
+<view style='height:30rpx;'></view>
+
+<text class="category">☆111</text>
+<view style='height:30rpx;'></view>
+<text class="category"><text style="color:red;font-size:26rpx;">★</text>111</text>

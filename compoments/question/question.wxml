@@ -1,10 +1,10 @@
 
 
 <scroll-view>
-{{data[0]}}
+{{data[0]}},{{no}}
 <view class="header">
   <block wx:if="{{data[4]=='S'}}">
-  <text class="category">选择</text>
+  <text class="category">单选</text>
   </block>
     <block wx:if="{{data[4]=='M'}}">
   <text class="category">多选</text>
@@ -16,7 +16,7 @@
 </view>
 <view class="main">
 <block  wx:for="{{data[1]}}" wx:for-index="idx" wx:for-item="answer" wx:key="{{answer[2]}}">
-  <view data-idx="{{idx}}" class="option{{answer[5]}}" bindtap='tap_select'>
+  <view data-idx="{{idx}}" data-id="{{data[0]}}" data-no="{{no}}" class="option{{answer[5]}}" bindtap='tap_select'>
 
     <rich-text nodes="<div class='circle {{answer[4]}}'>{{answer[2]}}</div>"></rich-text> 
 
@@ -30,7 +30,7 @@
 </block>
 
   <block wx:if="{{(data[4]=='M') && (data[8] == 'practice' || data[8]) && (data[9] == false)}}">
-  <view class="confirm" bindtap='tap_confirm'>
+  <view class="confirm" bindtap='tap_confirm' data-id="{{data[0]}}" data-no="{{no}}">
   <view class="btn{{data[7]}}">确定</view>
   </view>
   </block>

@@ -152,6 +152,7 @@ output:[["abcdefgh", "2,4;5,6", "A"],
 ["abcdefgh", "2,4;5,6", "C"]]
 */
 function add_answers_char(answers) {
+  console.log("add_answers_char",answers,answers.length,typeof answers)
   for (let i = 0; i < answers.length; ++i) {
     answers[i].push(String.fromCharCode(i + 65))
     //console.log(answers[i])
@@ -160,20 +161,7 @@ function add_answers_char(answers) {
   return answers;
 }
 
-/*
-invoke:hightlight_answers([["abcdefgh","2,4;5,6"],["abcdefgh","2,4;5,6"],["abcdefgh","2,4;5,6"]])
-output:[["ab<span class='red'>cd</span>e<span class='red'>f<…", "2,4;5,6"],
-["ab<span class='red'>cd</span>e<span class='red'>f<…", "2,4;5,6"],
-["ab<span class='red'>cd</span>e<span class='red'>f<…", "2,4;5,6"],
-["ab<span class='red'>cd</span>e<span class='red'>f<…", "2,4;5,6"]]
-*/
-function hightlight_answers(answers) {
-  for (let i = 0; i < answers.length; ++i) {
-    answers[i] = highlight_answer(answers[i])
-    //console.log("dd==", answers[i])
-  }
-  return answers
-}
+
 
 /*
 invoke:hightlight_answers([["abcdefgh","2,4;5,6"],["abcdefgh","2,4;5,6"],["abcdefgh","2,4;5,6"]])
@@ -212,7 +200,7 @@ fulldata为初始完成一道题的数据，fulldata[1]中每一个answer最初�
 当用记有点击等行为是，调用此函数，将返回值使用this.setData({})进行更新即可
 */
 
-function parctice_tap_confirm_or_exam_show_mode_or_exam_full_submit(course,fulldata, mode, selected_idxs)
+function parctice_tap_confirm_or_exam_show_mode_or_exam_full_submit(course,category,fulldata, mode, selected_idxs)
 {
   let { _fulldata, answers, right_answers } = _prepare_data(fulldata, selected_idxs, mode);//只有通过practiceu状态确定按钮提交,或是exam状态整体提交才变为true,表示该题已做
   /*
@@ -221,7 +209,7 @@ function parctice_tap_confirm_or_exam_show_mode_or_exam_full_submit(course,fulld
   */
     if (mode == "practice")
     {
-      store.add_practiced(course,_fulldata[0])
+      store.add_practiced(course,category,_fulldata[0])
       _fulldata[9] = true;//practiced
     }
     //console.log("zzzzzzzzzzzzzzzzzzzzzz")
@@ -386,7 +374,7 @@ function data_state_change(fulldata, mode, selected_idxs) {
 module.exports = {
   count_the_score:count_the_score,
   highlight_answer: highlight_answer,
-  highlight_answers: hightlight_answers,
+  highlight_answers: highlight_answers,
   add_answer_char:add_answers_char,
   data_state_change:data_state_change,
   parctice_tap_confirm_or_exam_show_mode_or_exam_full_submit:parctice_tap_confirm_or_exam_show_mode_or_exam_full_submit,
@@ -411,6 +399,7 @@ function _gave_selected_options_gray_backgroud(answers, selected_idxs) {
 function _prepare_data(fulldata, selected_idxs, mode) {
   let _fulldata = deepCopy(fulldata);
   let answers = _fulldata[1];
+  console.log("answers===>",answers)
   answers = add_answers_char(answers); //每一个answer现在有三项[question,hightlight_idxs,'A']
   let right_answers = _fulldata[3];
   //判断多选的确定按钮为灰色还是绿色

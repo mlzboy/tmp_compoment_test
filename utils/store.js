@@ -3,16 +3,17 @@ var add_wrong = (course,id) => _add_Xed(course + "_wrong",id)
 var remove_wrong = (course,id) => _remove_Xed(course+"_wrong",id)
 var add_star = (course,id) => _add_Xed(course + "_star",id)
 var remove_star = (course,id) => _remove_Xed(course + "_star",id)
-var is_practiced = (course,id) => _is_Xed(course + "_practiced",id)
-var add_practiced = (course,id) => _add_Xed(course + "_practiced",id)
+var is_practiced = (course,category,id) => _is_Xed(course + "_" + category + "_practiced",id)
+var add_practiced = (course,category,id) => _add_Xed(course + "_" + category + "_practiced",id)
 var is_examed = (course,id) => _is_Xed(course + "_examed",id)
 var add_examed = (course,id) => _add_Xed(course + "_examed",id)
-
+var add_answered = (key,id) => _add_Xed(key,id)
 
 /*
 删除examed key中对应的考试的值，
 同时删除以exam_course_exam_no命名的上次考试选择的键
- */
+同时删除以exam_course_exam_no_answered命名的上次考试选择的键
+*/
 function re_exam(course,exam_no)
 {
   let ret = []
@@ -33,6 +34,12 @@ function re_exam(course,exam_no)
     console.log("delete")
   }
   
+  key = `${course}_exam_${exam_no}_answered`
+  console.log(key)
+  if (_has_key(key)){
+    _del_key(key)
+    console.log("delete")
+  }  
 }
 
 function _del_key(key){
@@ -221,6 +228,7 @@ function _get_panel_from_localstorage(init_panel){
 
 
 module.exports = {
+  add_answered:add_answered,
   get_wrong_idxs:get_wrong_idxs,
   get_star_idxs:get_star_idxs,
   add_star:add_star,

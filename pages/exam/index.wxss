@@ -48,6 +48,12 @@ text-align: center;
 line-height: 80rpx;
 margin:20rpx 20rpx 20rpx 0;
 }
+.green5
+{
+  border-color: green;
+  background-color: white;
+  box-shadow:0px 0px 8rpx green;
+}
 .answer
 {
 display: block;
@@ -83,6 +89,7 @@ border-color:#00c355;
   background-color: white;
   box-shadow:0px 0px 8rpx gray;
 }
+
 .green2{
   color:#00c355;
   font-size: 30rpx;

@@ -3,17 +3,20 @@ var core = require("../../utils/core.js")
 
 //获取应用实例
 const app = getApp()
-
+var DATA;
 
 Page({
   
   data: {
+    practice_or_examed_number:0,
+    total:0,
     score:0,
     showDialog:false,
     course:"大学心理学",
     exam_no:0,
     category:'',
     list:[],
+    list2:[],//下拉1-80(exam) or 1-x(practice) 中圈的状态，做过的标绿，[true or false] list
     mode: 'exam',
     idata: [
       9091,
@@ -35,6 +38,57 @@ Page({
       */
     ],
     is_vip: false
+  },
+  answered_question:function(e){
+    //只对exam和practice进行统计做过的题
+    //通过统计course_mode_category或course_exam_exam_no中的数据来作为作过题的统计
+    console.log("answer_question",e.detail.id,e.detail.idx)
+    if (this.properties.mode == "practice")
+    {
+      let key = `${this.properties.course}_${this.properties.category}_practiced`
+      let ids = store._get(key)
+      this.data.practice_or_examed_number = ids.length
+    }
+    else if (this.properties.mode == "exam")
+    {
+      key = `${this.properties.course}_${this.properties.mode}_${this.properties.exam_no}`
+      let selected_idxs = store._get(key)
+      let cnt = 0
+      for (let key in selected_idxs){
+        if (selected_idxs[key].length > 0)
+        {
+          cnt += 1
+        }
+      }
+      this.data.practice_or_examed_number = cnt
+    }
+    this.setData({practice_or_examed_number:this.data.practice_or_examed_number})
+    // let key1 = key + "_idx"
+    // let key2 = key + "_id"
+    // store.add_answered(key+"_idx",e.detail.no)//1-x索引
+    // store.add_answered(key+"_id",e.detail.id)//正排id
+    // let nos = store._get(key1)
+    // let ids = store._get(key2)
+    // console.log("nos:",nos)
+    // this.data.practice_or_examed_number = nos.length
+    // for(let i = 0 ; i < this.data.list.length; ++i){
+    //   let ret = nos.indexOf(i+1)
+    //   if (ret > -1){
+    //     let id = ids[ret]
+    //     DATA.forward_idxs[id]
+
+
+    //   }
+    //   if (nos.includes(i+1)){
+    //     this.data.list2.push(nos.includes(i+1))
+    //   }
+    // }
+    // console.log("list2:",this.data.list2)
+    // this.setData({
+    //   practice_or_examed_number:this.data.practice_or_examed_number,
+    //   list2:this.data.list2
+    // })
+
   },
   submit_exam:function(){
     console.log("submit_exam")
@@ -101,7 +155,7 @@ Page({
     console.log("exam_no",this.data.exam_no)
     console.log("category",this.data.category)
     //load require bussiness data
-    let DATA = require("../../data/" + this.data.course + ".js")
+    DATA = require("../../data/" + this.data.course + ".js")
     let current_x_idxs = []
     let title = this.data.course 
     this.data.mode = "practice"
@@ -142,7 +196,7 @@ Page({
         }
 
         //count the score
-        let key1 = `${this.properties.course}_exam_${this.properties.exam_no}`
+        let key1 = `${this.data.course}_exam_${this.data.exam_no}`
         let user_selected_idxs = store._get(key1)
         console.warn("TTTTTTTTTTTTTTTTTTTTTTTT")
         this.data.score = core.count_the_score(user_selected_idxs,DATA.forward_idxs)
@@ -172,6 +226,7 @@ Page({
         console.log(panel,this.data.mode)
         break;
     }
+    this.data.total = current_x_idxs.length
     console.log("A111111111111111111111111111")
     // console.log(current_x_idxs)
     console.log("current_x_idx length:",current_x_idxs.length)
@@ -194,7 +249,8 @@ Page({
       course:this.data.course,
       exam_no:this.data.exam_no,
       mode:this.data.mode,
-      category:this.data.category
+      category:this.data.category,
+      total:this.data.total
     })
  
 
@@ -207,7 +263,7 @@ Page({
   },
   anchor:function(){
     console.log("zzz")
-    this.setData({toview:"t20",showDialog:!this.data.showDialog})
+    this.setData({showDialog:!this.data.showDialog})
 
 
   },
