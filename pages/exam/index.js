@@ -51,12 +51,15 @@ Page({
     }
     else if (this.properties.mode == "exam")
     {
-      key = `${this.properties.course}_${this.properties.mode}_${this.properties.exam_no}`
+      let key = `${this.properties.course}_${this.properties.mode}_${this.properties.exam_no}`
       let selected_idxs = store._get(key)
+      console.log("---------------selected_idx",selected_idxs)
       let cnt = 0
       for (let key in selected_idxs){
+        console.log("zzzz==>",selected_idxs[key],typeof selected_idxs[key],selected_idxs[key].length)
         if (selected_idxs[key].length > 0)
         {
+          console.log(key)
           cnt += 1
         }
       }

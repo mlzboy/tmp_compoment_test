@@ -145,7 +145,6 @@ Component({
         if (this.properties.mode == "memory_normal" || this.properties.mode == "memory_vip" || this.properties.mode == "exam_show" || (store.is_practiced(this.properties.course,this.properties.idata[0]) == true && this.properties.mode == "practice")) {
           return
         }
-        this.fireEvent(e);
 
         var that = this;
         var idx = e.currentTarget.dataset.idx;
@@ -169,10 +168,12 @@ Component({
           r = core.data_state_change(this.properties.idata, this.properties.mode, selected_idxs)
           r[9] = false//exam
           that.setData({ data: r })
+          this.fireEvent(e);
+
           return      
         }
         else {//mode=practice单选，直接给结果,标记为practiced//mode=exam,单选，只能选中一个，选中其中一个，原先选中的取消
-          {
+          
             if (this.data.mode == "practice") {
               key1 = `${this.properties.course}_${this.properties.mode}_${this.properties.category}`
               key2 = this.properties.idata[0]
@@ -198,12 +199,10 @@ Component({
             }
             console.log(r)
             that.setData({ data: r })
-          }
+          
+         }
+        this.fireEvent(e);
 
-
-
-
-          }
-      }
+    }
   }
 })
