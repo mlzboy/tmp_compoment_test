@@ -1,0 +1,73 @@
+<scroll-view class="sv" scroll-x="false" scroll-y="true"  
+    scroll-top="0" scroll-left="0"  enable-back-to-top="true" >
+    <view class="row bottom">
+    <view class="title">基础信息</view>
+</view>
+<view class="row bottom">
+    <view class="title">用户昵称</view>
+    <view class="content">...</view>
+    <view class="btn">获取</view>
+</view>
+<view class="row bottom">
+    <view class="title">账号类型</view>
+    <view class="content">VIP</view>
+    <view class="btn">升级</view>
+</view>
+
+
+<view class="row bottom" style="margin-top:100rpx;">
+    <view class="title">代看视频*</view><view class="btn">保存</view>
+</view>
+<view class="row bottom">
+    <view class="title">账号</view>
+    <input placeholder="输入身份证" />
+</view>
+<view class="row bottom">
+    <view class="title">密码</view>
+    <input placeholder="输入密码" />
+</view>
+<view class="row bottom">
+    <view class="title">状态</view>
+    <view class="content">未使用</view>
+    <view class="btn"></view>
+</view>
+<view class="row">
+    <view class="title2">适用于浙江省高校教师岗前培训考试系统，次日凌晨通知完成情况</view>
+</view>
+
+
+<view class="table">
+    <view class="cell l t">权益</view>
+    <view class="cell2 t">免费会员</view>
+    <view class="cell2 t">VIP会员</view>
+
+    <view class="cell l">4</view>
+    <view class="cell2">5</view>
+    <view class="cell2">6</view>
+    
+    <view class="cell l">7</view>
+    <view class="cell2">8</view>
+    <view class="cell2">9</view>
+
+    <view class="cell l">7</view>
+    <view class="cell2">8</view>
+    <view class="cell2">9</view>
+
+    <view class="cell l">7</view>
+    <view class="cell2">8</view>
+    <view class="cell2">9</view>
+
+    <view class="cell l">7</view>
+    <view class="cell2">8</view>
+    <view class="cell2">9</view>
+
+    <view class="cell l">7</view>
+    <view class="cell2">8</view>
+    <view class="cell2">9</view>
+
+</view>
+
+
+
+</scroll-view>
+  

@@ -1,7 +1,4 @@
-// pages/layout/index.js
-
-
-
+// pages/vip/index.js
 Page({
 
   /**
@@ -15,34 +12,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // 微信用户登录小程序
-    wx.BaaS.login(false).then(res => {
-      // 登录成功
-      console.log("aaaaa",res.openid,res.id)
-    }, err => {
-      // 登录失败
-    })
-
-    let MyUser = new wx.BaaS.User()
-    let currentUser = MyUser.getCurrentUserWithoutData()
-
-    // age 为自定义字段
-    currentUser.set('account_type', 1).update().then(res => {
-      // success
-      console.log("111111")
-    }, err => {
-      // err
-    })
-
-    // let tableName = '_userprofile'
-    // let recordID = '71437442'
-
-    // let Product = new wx.BaaS.TableObject(tableName)
-    // Product.delete(recordID).then(res => {
-    //   console.log("success")
-    // }, err => {
-    //   // err
-    // })
 
   },
 

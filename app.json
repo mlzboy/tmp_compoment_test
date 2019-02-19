@@ -1,10 +1,11 @@
 {
   "pages": [
+    "pages/index/index",
     "pages/xsl/index",
     "pages/exam/index",
     "pages/home/index",
     "pages/layout/index",
-    "pages/index/index"
+    "pages/vip/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -30,5 +31,11 @@
         "selectedIconPath": "images/xsl_812.png"
       }
     ]
+  },
+  "plugins": {
+    "sdkPlugin": {
+      "version": "1.16.0",
+      "provider": "wxc6b86e382a1e3294"
+    }
   }
 }

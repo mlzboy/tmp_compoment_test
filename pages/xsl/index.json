@@ -1,4 +1,5 @@
 {
+  "navigationBarTitleText": "校事历",
   "usingComponents": {
     "dayblock":"/compoments/dayblock/dayblock"
   }
